@@ -155,31 +155,6 @@ QString CTools::readableBytes(quint64 bytes)
     return QString().asprintf("%0.3f", val) + SIZE_NAMES[index];
 }
 
-QByteArray CTools::readFile(const QString& filename, bool& isOk)
-{
-    QByteArray ret;
-    isOk = false;
-    do
-    {
-        if (filename.isEmpty())
-        {
-            LOG_WARNING("empty filename");
-            break;
-        }
-
-        QFile f(filename);
-        if (!f.open(QIODevice::ReadOnly))
-        {
-            LOG_WARNING(QString("cannot open file %1 for read").arg(filename));
-            break;
-        }
-        ret = f.readAll();
-        isOk = true;
-    }
-    while(false);
-    return ret;
-}
-
 void CTools::SyncThreadTerminate(QThread* ptr, int delay)
 {
     if (ptr == nullptr)

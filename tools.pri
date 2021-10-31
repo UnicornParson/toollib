@@ -192,11 +192,13 @@ HEADERS += \
     $$PWD/exceptions/toolsexception.h \
     $$PWD/exceptions/notimplementedexception.h \
     $$PWD/exceptions/toollibexceptions.h \
+    $$PWD/fileutils.h \
     $$PWD/xmutexguard.h
 
 SOURCES += \
     $$PWD/exceptions/toolsexception.cpp \
     $$PWD/exceptions/notimplementedexception.cpp \
+    $$PWD/fileutils.cpp \
     $$PWD/xmutexguard.cpp
 
 

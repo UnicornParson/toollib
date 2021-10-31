@@ -129,8 +129,6 @@ namespace Tools
     return ret;
   }
 
-
-
   class CTools
   {
   public:
@@ -155,7 +153,7 @@ namespace Tools
     static bool checkRequiredKeys(const QtJson::JsonObject& obj, const QStringList& requiredKeys);
     //static bool _selfTest();
 
-    static QByteArray readFile(const QString& filename, bool& isOk);
+
     static QString readableBytes(quint64 bytes);
     static bool compareFiles(const QString& left, const QString& right, bool& ok);
     static bool compareFiles(QFile &left, QFile &right, bool& ok);
