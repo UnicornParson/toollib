@@ -89,6 +89,21 @@ namespace Tools
 
   typedef MOptional<QString> OptionalString;
 
+  template<class T, class U>
+  inline QTextStream& operator<<(QTextStream& out, const QPair<T, U>& pair) {
+      out << "QPair<" << pair.first << pair.second << ">";
+      return out;
+  }
+
+  template<typename T>
+  inline QString anyToString (const T& value)
+  {
+      QString s;
+      QTextStream out(&s);
+      out << value;
+      return s;
+  }
+
   template<typename QEnum>
   inline QString QEnumToString (const QEnum value)
   {
