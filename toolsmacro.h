@@ -9,6 +9,8 @@
 #include <QtGlobal>
 #include <QRandomGenerator>
 #include <QRandomGenerator64>
+#include <QDebug>
+
 // compiler check
 
 
@@ -275,5 +277,12 @@ INLINE quint64 mrand64()
 #define QT_KEEP_EMPTY_PARTS Qt::KeepEmptyParts
 #endif
 
+inline Q_NORETURN void __not_implemented_impl(const QString& here)
+{
+    const QString s = QString("not implemented place called ") + here;
+    qWarning() << s;
+    throw std::runtime_error(s.toStdString());
+}
+#define NOT_IMPLEMENTED __not_implemented_impl(__HERE__);
 
 #endif // TOOLSMACRO_H
