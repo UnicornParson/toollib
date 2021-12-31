@@ -49,6 +49,10 @@ inline msTime_t msTime()
   return QDateTime::currentMSecsSinceEpoch();
 }
 #endif
+inline QString msTimeStr()
+{
+  return QString("%1").arg(msTime());
+}
 
 namespace QtJson
 {

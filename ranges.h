@@ -75,5 +75,30 @@ Q_DECL_CONSTEXPR inline T boundedSub(T a, T b, T min, T max) noexcept
     return fitToLimits<T>((a - b), min, max);
 }
 
+
+template< class in_t, class out_t>
+QList<out_t> inline map(QList<in_t> in, const std::function<out_t(const in_t&)>& functor)
+{
+    QList<out_t> out;
+    out.reserve(in.size());
+    for(const in_t& i: in)
+    {
+        out.append(functor(i));
+    }
+    return out;
+}
+
+template< class T>
+QList<T> inline filter(QList<T> in, const std::function<bool(const T&)>& functor)
+{
+    QList<T> out;
+    out.reserve(in.size());
+    for(const T& i: in)
+    {
+        if(functor(i)){out.append(i);}
+    }
+    return out;
+}
+
 } // namespace Tools::Ranges
 #endif // RANGES_H
