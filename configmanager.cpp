@@ -6,8 +6,11 @@
 
 using namespace Tools;
 
+namespace
+{
 CONST_LITERAL CATEGORY_XML_TAG("category");
 CONST_LITERAL JSON_COMMENT_PREFIX("#");
+}
 
 ConfigManager ConfigManager::defaultManager;
 
@@ -52,15 +55,13 @@ void ConfigManager::setParam(const QString& path, const QVariant value)
 
 uint ConfigManager::count() const
 {
-    return  m_params.size() + m_runtimeParams.size();
+    return m_params.size() + m_runtimeParams.size();
 }
 
 ConfigManager& ConfigManager::getDefaultManager() noexcept
 {
     return defaultManager;
 }
-
-
 
 QString ConfigManager::removeComments(const QString& content) const
 {
@@ -162,7 +163,6 @@ bool ConfigManager::appendJsonMulti(const QList<ConfigSeqEntry>& queue, const QS
         case ConfigSeqEntry::SkipEntry:
         {
             continue;
-            break;
         }
         case ConfigSeqEntry::PathBasedEntry:
         {
@@ -198,6 +198,12 @@ bool ConfigManager::appendJsonMulti(const QList<ConfigSeqEntry>& queue, const QS
             }
         }
         }
+        if(restoreStable)
+        {
+            LOG_WARNING("restore last stable configuration");
+            m_params = std::move(m_latestStable);
+            m_latestStable.clear();
+        }
     }
     return bRet;
 }
@@ -219,7 +225,7 @@ bool ConfigManager::appendJson(const QtJson::JsonObject object, const QString& m
     LOG_TRACE(QString("mount config tree to %1").arg(mountPoint));
     for (const QString &key: object.keys())
     {
-        QString fullKey = key.toLower();;
+        QString fullKey = key.toLower();
         if (!mountPoint.isEmpty())
         {
             fullKey = mountPoint + "/" + key.toLower();
@@ -511,7 +517,7 @@ QStringList ConfigManager::getDump()
         QString sOrigin = (ok) ? origin.toString() : "[[MISSED]]";
         list.append(QString("[%1] >> actual:%2, origin:%3").arg(key, sActual, sOrigin));
     }
-    LOG_TRACE("%lld parameters are dumped", m_params.size());
+    LOG_TRACE("%d parameters are dumped", m_params.size());
     DESTROY_PERF_SENSOR;
     return list;
 }

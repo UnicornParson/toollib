@@ -3,6 +3,10 @@
 
 #include "toolsmacro.h"
 #include <QList>
+#include <QFutureSynchronizer>
+#include <tuple>
+#include <QString>
+#include <QtConcurrent>
 
 namespace Tools::Ranges
 {
@@ -76,8 +80,10 @@ Q_DECL_CONSTEXPR inline T boundedSub(T a, T b, T min, T max) noexcept
 }
 
 
+
+
 template< class in_t, class out_t>
-QList<out_t> inline map(QList<in_t> in, const std::function<out_t(const in_t&)>& functor)
+QList<out_t> inline mapSingleThread(QList<in_t> in, const std::function<out_t(const in_t&)>& functor)
 {
     QList<out_t> out;
     out.reserve(in.size());
@@ -87,6 +93,38 @@ QList<out_t> inline map(QList<in_t> in, const std::function<out_t(const in_t&)>&
     }
     return out;
 }
+
+template< class in_t, class out_t>
+QList<out_t> inline mapMT(QList<in_t> in, const std::function<out_t(const in_t&)>& functor)
+{
+    QList<out_t> out;
+    out.reserve(in.size());
+    QFutureSynchronizer<out_t> sync;
+    for(const in_t& i: in)
+    {
+        sync.addFuture(QtConcurrent::run([&functor](const in_t& i){return functor(i);}, i));
+    }
+    sync.waitForFinished();
+    auto futures = sync.futures();
+    for(const QFuture<out_t>& f: futures)
+    {
+        out.append(f.result());
+    }
+    return out;
+}
+
+
+template< class in_t, class out_t>
+QList<out_t> inline map(QList<in_t> in, const std::function<out_t(const in_t&)>& functor)
+{
+#ifdef FEATURE_MULTITHREADS
+    return mapMT(in, functor);
+#else
+    return mapSingleThread(in, functor);
+#endif
+
+}
+
 
 template< class T>
 QList<T> inline filter(QList<T> in, const std::function<bool(const T&)>& functor)

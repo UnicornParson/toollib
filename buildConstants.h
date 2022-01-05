@@ -73,7 +73,11 @@ MAYBE_UNUSED_ATTR const QStringList BUILDCFG_FEATURES
             LITERAL_TO_STRING(FEATURE_OPENGL),
         #endif
 
-            FEATURES_END
+        #ifdef FEATURE_MULTITHREADS
+            LITERAL_TO_STRING(FEATURE_MULTITHREADS),
+        #endif
+
+        FEATURES_END
 }; // const QStringList BUILDCFG_FEATURES
 
 class ConstantsHelper

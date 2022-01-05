@@ -36,7 +36,7 @@ CONFIG(release, debug|release) {
     QMAKE_CXXFLAGS += -flto -O3
 }
 
-QT += network xml core
+QT += network xml core concurrent
 CONFIG += NO_OPENSSL_LIB
 QMAKE_CXXFLAGS_WARN_ON -= -Wreorder -Wformat= -WsignConversion
 

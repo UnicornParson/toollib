@@ -423,7 +423,6 @@ QByteArray SecurityUtilsEmbeded::getSignedFingerprint(const QByteArray& in)
 {
   Q_UNUSED(in)
   THROW_TOOL_LIB_UNSUPPORTED_EXCEPTION;
-  GARBAGE_CODE_MARKER
 #if 0
   QByteArray ret;
   do
@@ -438,9 +437,8 @@ QByteArray SecurityUtilsEmbeded::getSignedFingerprint(const QByteArray& in)
 
 bool SecurityUtilsEmbeded::verifySignedFingerprint(const QByteArray& in)
 {
-  UNUSED(in);
+  UNUSED(in)
   THROW_TOOL_LIB_UNSUPPORTED_EXCEPTION;
-  GARBAGE_CODE_MARKER
 #if 0
   bool bRet = false;
   do

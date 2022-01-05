@@ -16,7 +16,7 @@ namespace RuntimeKeys
 {
 CONST_LITERAL RTTAG_BIN_PATH("runtime/path/binPath");
 CONST_LITERAL RTTAG_LOG_DIR("runtime/path/logDir");
-}
+} // namespace RuntimeKeys
 
 class ConfigManager: public QObject
 {
@@ -83,5 +83,5 @@ private:
     bool m_loadingIsActive;
     uint m_affectedParams;
 }; //class ConfigManager
-}
+} // namespace Tools
 #endif // CONFIGMANAGER_H
