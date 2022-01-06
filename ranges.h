@@ -41,6 +41,26 @@ inline QList<T> range(const T& min, const T& max) noexcept
     return range(min, max, T(1));
 }
 
+template< typename T, typename = typename std::enable_if<std::is_arithmetic<T>::value, T>::type>
+QList<T> chain(QList<QList<T> > ranges) noexcept
+{
+    QList<T> r;
+    int sz = 1;
+    for(const QList<T>& l: ranges)
+    {
+        sz += l.size();
+    }
+    r.reserve(sz);
+    for(const QList<T>& l: ranges)
+    {
+        r.append(l);
+    }
+//    auto variantLessThan = [](const T &v1, const T &v2){return v1 < v2;}
+    std::sort(r.begin(), r.end());
+    return r;
+}
+
+
 template< class T >
 inline bool inScope(const T& val, const QList<T>& scope) noexcept
 {
