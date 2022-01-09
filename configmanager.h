@@ -18,10 +18,29 @@ CONST_LITERAL RTTAG_BIN_PATH("runtime/path/binPath");
 CONST_LITERAL RTTAG_LOG_DIR("runtime/path/logDir");
 } // namespace RuntimeKeys
 
+using ConfigParamChecker_func = std::function<bool(const QVariant&)>;
+
+namespace DefaultParamCheckers
+{
+const auto EmptyString = [](const QVariant& v)
+{
+    return v.toString().trimmed().isEmpty();
+};
+const auto NotEmptyString = [](const QVariant& v)
+{
+    return !v.toString().trimmed().isEmpty();
+};
+
+} // namespace DefaultParamCheckers
+
+
 class ConfigManager: public QObject
 {
     Q_OBJECT
 public:
+
+
+
     explicit ConfigManager(QObject *parent = nullptr) noexcept;
     explicit ConfigManager(const ConfigManager&) = delete;
     explicit ConfigManager(const ConfigManager&& other) = delete;
@@ -47,6 +66,8 @@ public:
     ATTR_NODISCARD bool appendJson(const QtJson::JsonObject object, const QString& mountPoint = QString());
 
     ATTR_NODISCARD bool contains(const QString& path);
+    ATTR_NODISCARD bool checkParam(const QString& path, const ConfigParamChecker_func& checker);
+
     void setParam(const QString& path, const QVariant value);
 
     bool dumpPlain(const QString& path);

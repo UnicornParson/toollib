@@ -189,13 +189,16 @@ win32: DEFINES+=PLATFORM_WINDOWS
 } #else of DINC_TOOLS_MARKER
 
 HEADERS += \
+    $$PWD/dataformatinfo.h \
     $$PWD/exceptions/toolsexception.h \
     $$PWD/exceptions/notimplementedexception.h \
     $$PWD/exceptions/toollibexceptions.h \
     $$PWD/fileutils.h \
+    $$PWD/literals.h \
     $$PWD/xmutexguard.h
 
 SOURCES += \
+    $$PWD/dataformatinfo.cpp \
     $$PWD/exceptions/toolsexception.cpp \
     $$PWD/exceptions/notimplementedexception.cpp \
     $$PWD/fileutils.cpp \

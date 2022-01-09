@@ -34,6 +34,7 @@
 #include "buildConstants.h"
 #include "functionscheduler.h"
 #include "ranges.h"
+#include "literals.h"
 
 typedef std::atomic<quint64> counter_t;
 typedef qint64 msTime_t;

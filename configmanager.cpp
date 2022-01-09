@@ -429,6 +429,19 @@ bool ConfigManager::contains(const QString& path)
     return m_params.contains(path.toLower()) || m_runtimeParams.contains(path.toLower());
 }
 
+bool ConfigManager::checkParam(const QString& path, const ConfigParamChecker_func& checker)
+{
+    XMutexGuard<XRecursiveMutex> g(&m_treeMutex);
+    if(!contains(path))
+    {
+        return false;
+    }
+
+    const QVariant& val = m_params[path];
+    return checker(val);
+}
+
+
 QVariant ConfigManager::getParam(const QString& path, bool& isOk)
 {
     ADD_PERF_SENSOR_EX(path);

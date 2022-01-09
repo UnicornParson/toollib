@@ -77,6 +77,10 @@ MAYBE_UNUSED_ATTR const QStringList BUILDCFG_FEATURES
             LITERAL_TO_STRING(FEATURE_MULTITHREADS),
         #endif
 
+        #ifdef FEATURE_DATAFORMATS_INFO
+            LITERAL_TO_STRING(FEATURE_DATAFORMATS_INFO),
+        #endif
+
         FEATURES_END
 }; // const QStringList BUILDCFG_FEATURES
 

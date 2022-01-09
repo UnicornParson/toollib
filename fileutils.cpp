@@ -1,11 +1,13 @@
 #include "fileutils.h"
 #include <QFile>
+#include <QDir>
+#include <QFileInfo>
 #include "CuteLogger/cuteloggerinc.h"
 #include "performancesensor.h"
 
 using namespace Tools;
 
-QByteArray readFile(const QString& filename, bool& isOk)
+QByteArray FileUtils::readFile(const QString& filename, bool& isOk)
 {
     ADD_PERF_SENSOR;
     QByteArray ret;
@@ -33,7 +35,7 @@ QByteArray readFile(const QString& filename, bool& isOk)
     return ret;
 }
 
-QStringList readLines(const QString& filename, bool& isOk, bool trim = true)
+QStringList FileUtils::readLines(const QString& filename, bool& isOk, bool trim)
 {
     ADD_PERF_SENSOR;
     isOk = false;
@@ -65,7 +67,7 @@ QStringList readLines(const QString& filename, bool& isOk, bool trim = true)
     return list;
 }
 
-bool writeLines(const QString& filename, const QStringList& lines)
+bool FileUtils::writeLines(const QString& filename, const QStringList& lines)
 {
     ADD_PERF_SENSOR;
     QString text;
@@ -97,4 +99,32 @@ bool writeLines(const QString& filename, const QStringList& lines)
     while(false);
     DESTROY_PERF_SENSOR;
     return isOk;
+}
+
+QStringList FileUtils::dirList(const QString& path, bool recursive)
+{
+
+    QDir d(path);
+    if(!d.exists() || d.isEmpty())
+    {
+        return QStringList();
+    }
+
+    if(!recursive)
+    {
+        return d.entryList();
+    }
+
+    QStringList rc;
+    for(const QString& entry : d.entryList())
+    {
+        QString subpath = path + "/" + entry;
+        QFileInfo fi(subpath);
+        rc.append(entry);
+        if(fi.isDir())
+        {
+            rc.append(dirList(subpath, true));
+        }
+    }
+    return rc;
 }
