@@ -1,0 +1,6 @@
+<div class="header" style="background: %1">
+  <h1 style="text-shadow: 1px 1px 2px black;">%2</h1>
+  <p style="text-shadow: 1px 1px 2px black;">%3</p>
+</div>
+<table>
+<tr class='headerRow'><td>Result</td><td>Name</td><td>Reason</td><td>Time</td></tr>

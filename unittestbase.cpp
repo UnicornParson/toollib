@@ -1,11 +1,11 @@
 #include "unittestbase.h"
 #include "CuteLogger/cuteloggerinc.h"
+#include "internal/unittestprinterinternal.h"
+#include "tools.h"
+
 using namespace Tools;
 
-CONST_LITERAL RC_PASSED("  PASSED  ");
-CONST_LITERAL RC_FAILED("> FAILED <");
-
-UnitTestBase::UnitTestBase():
+UnitTestBase::UnitTestBase()  noexcept:
     testPlanTime(0),
     m_skipped(false)
 {
@@ -87,66 +87,34 @@ void UnitTestBase::printResults()
 
 void UnitTestBase::printResults(const QHash<QString, TestResult>& results)
 {
-    LOG_TRACE_LINE;
-    LOG_TRACE("TEST RESULTS:");
-    LOG_TRACE_LINE;
-    uint passed = 0;
-    uint failed = 0;
-    QStringList failedMessages;
-    QStringList passedMessages;
-    foreach(QString key, results.keys())
-    {
-        QString reasonMsg = "";
+    UnitTestPrinterInternal printer;
+    QString msg = printer.toPlain(results);
+    LOG_TRACE(msg);
+}
 
-        TestResult result = results.value(key);
-        if (!result.bSuccess)
-        {
-            reasonMsg = QString("Reason: %3. ").arg((result.reason.isEmpty())?"{EMPTY REASON}":result.reason);
-        }
-        QString message = QString("%1 - Test %2. %3. Executing time: %4")
-                .arg((result.bSuccess) ? RC_PASSED : RC_FAILED,
-                     key, result.reason, result.strTime);
-        if (result.bSuccess)
-        {
-            LOG_TRACE(message);
-            passedMessages.append(message);
-            passed++;
-        }
-        else
-        {
-            failedMessages.append(message);
-            failed++;
-        }
-    }
-    passedMessages.sort();
-    foreach(QString m, passedMessages)
+bool UnitTestBase::resultsToFile(ePrintFormat_t format, const QString& path)
+{
+    bool bRet = false;
+    do
     {
-        LOG_ERROR(m);
-    }
-    LOG_TRACE_LINE;
-    QString summary = QString("TEST RESULTS: %1, count: %2, passed: %3, failed: %4")
-            .arg((failed == 0) ? RC_PASSED : RC_FAILED)
-            .arg(results.size())
-            .arg(passed)
-            .arg(failed);
-
-    if (failed == 0)
-    {
-        LOG_TRACE(summary);
-    }
-    else
-    {
-        LOG_TRACE_LINE;
-        LOG_ERROR("FAILED TESTS:");
-        failedMessages.sort();
-        foreach(QString m, failedMessages)
+        if(path.isEmpty())
         {
-            LOG_ERROR(m);
+            LOG_WARNING("empty file path");
+            break;
         }
-        LOG_TRACE_LINE;
-        LOG_ERROR(summary);
+    QFile out(path);
+    if(!out.open(QIODevice::WriteOnly))
+    {
+        LOG_WARNING("cannot open "_s + path);
+        break;
     }
-    LOG_TRACE_LINE;
+    out.write(resultsToString(format).toUtf8());
+    out.flush();
+    out.close();
+    bRet = true;
+    }
+    while(false);
+    return bRet;
 }
 
 void UnitTestBase::TestPlanSetup()
@@ -195,6 +163,17 @@ void UnitTestBase::appendResults(const QHash<QString, TestResult>& rcMap)
     foreach(QString key, rcMap.keys())
     {
         results.insert(key, rcMap.value(key));
+    }
+}
+
+QString UnitTestBase::resultsToString(ePrintFormat_t format)
+{
+    UnitTestPrinterInternal printer;
+    switch(format)
+    {
+    case ePrintFormat_t::Plain:{return printer.toPlain(results);}
+    case ePrintFormat_t::Json:{return QtJson::serializeStr(printer.toJson(results));}
+    case ePrintFormat_t::Html:{return printer.toHtml(results);}
     }
 }
 

@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>testTemplates/bodyFooter.txt</file>
+        <file>testTemplates/bodyHeader.txt</file>
+        <file>testTemplates/htmlFooter.txt</file>
+        <file>testTemplates/htmlHeader.txt</file>
+    </qresource>
+</RCC>

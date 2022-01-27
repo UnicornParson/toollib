@@ -40,19 +40,30 @@ typedef std::atomic<quint64> counter_t;
 typedef qint64 msTime_t;
 
 #ifdef USE_CPP_TIME
-inline msTime_t msTime()
+inline msTime_t msTime() noexcept
 {
   return std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 }
 #else
-inline msTime_t msTime()
+inline msTime_t msTime() noexcept
 {
   return QDateTime::currentMSecsSinceEpoch();
 }
 #endif
-inline QString msTimeStr()
+
+inline QString msTimeStr() noexcept
 {
   return QString("%1").arg(msTime());
+}
+
+inline QString timeStr() noexcept
+{
+  return QDateTime::currentDateTime().toString("yyyy-MM-dd  HH:mm:ss");
+}
+
+inline QString timeStrFnameCompatible() noexcept
+{
+  return QDateTime::currentDateTime().toString("yyyy.MM.dd.HH.mm.ss");
 }
 
 namespace QtJson

@@ -1,0 +1,6 @@
+<div class="header" style="background: %1">
+  <h1>%2</h1>
+  <p>%3</p>
+</div>
+<table>
+<tr class='headerRow'><td>Result</td><td>Name</td><td>Reason</td><td>Time</td></tr>

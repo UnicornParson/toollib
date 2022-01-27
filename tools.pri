@@ -155,7 +155,8 @@ HEADERS += \
     $$PWD/version.h \
     $$PWD/functionscheduler.h\
     $$PWD/buildConstants.h \
-    $$PWD/responseobject.h
+    $$PWD/responseobject.h \
+    $$PWD/ranges.h
 
 SOURCES += \
     $$PWD/tools.cpp \
@@ -203,6 +204,9 @@ SOURCES += \
     $$PWD/exceptions/notimplementedexception.cpp \
     $$PWD/fileutils.cpp \
     $$PWD/xmutexguard.cpp
+
+RESOURCES += \
+    $$PWD/res/embededData.qrc
 
 
 

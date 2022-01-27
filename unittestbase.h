@@ -19,7 +19,14 @@ public:
     quint64 mstime;
   };
 
-  UnitTestBase();
+  enum class ePrintFormat_t
+  {
+      Plain,
+      Json,
+      Html
+  };
+
+  UnitTestBase() noexcept;
   virtual ~UnitTestBase();
   static void printResults(const QHash<QString, TestResult>& results);
 
@@ -36,6 +43,9 @@ public:
   ATTR_NODISCARD quint64 getTestPlanTimeMs();
   virtual void TestPlanSetup();
   virtual void TestPlanCleanup();
+
+  QString resultsToString(ePrintFormat_t format);
+  bool resultsToFile(ePrintFormat_t format, const QString& path);
 protected:
   virtual bool runImpl() = 0;
   void logTestStart(const QString& testname);
