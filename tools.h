@@ -111,6 +111,18 @@ namespace Tools
       return out;
   }
 
+  template<class A, class B>
+  inline QTextStream& operator<<(QTextStream& out, const std::tuple<A, B>& t) {
+      out << "tuple<" << std::get<0>(t) << std::get<1>(t) << ">";
+      return out;
+  }
+
+  template<class A, class B, class C>
+  inline QTextStream& operator<<(QTextStream& out, const std::tuple<A, B, C>& t) {
+      out << "tuple<" << std::get<0>(t) << std::get<1>(t) << std::get<2>(t) << ">";
+      return out;
+  }
+
   template<typename T>
   inline QString anyToString (const T& value)
   {

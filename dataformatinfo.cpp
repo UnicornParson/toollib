@@ -57,7 +57,7 @@ bool DataFormatInfo::loadData(const QString& json)
         QtJson::JsonObject obj = QtJson::parse(json).toMap();
         if(obj.isEmpty())
         {
-            Q_ASSERT_X(false, m_name.toLatin1(), QString("object is empty. data: %1").arg(json).toLatin1());
+            Q_ASSERT_X(false, m_name.toLatin1(), QString("object is empty or parsing error. data: %1").arg(json).toLatin1());
             break;
         }
         bRet = true;

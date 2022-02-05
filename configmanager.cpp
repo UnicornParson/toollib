@@ -432,13 +432,17 @@ bool ConfigManager::contains(const QString& path)
 bool ConfigManager::checkParam(const QString& path, const ConfigParamChecker_func& checker)
 {
     XMutexGuard<XRecursiveMutex> g(&m_treeMutex);
-    if(!contains(path))
+
+    if(m_params.contains(path.toLower()))
     {
-        return false;
+        return checker(m_params[path.toLower()]);
     }
 
-    const QVariant& val = m_params[path];
-    return checker(val);
+    if(m_runtimeParams.contains(path.toLower()))
+    {
+        return checker(m_runtimeParams[path.toLower()]);
+    }
+    return false;
 }
 
 

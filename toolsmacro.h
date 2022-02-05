@@ -107,7 +107,7 @@
 #define LCHR(l) (l.data())
 #define GLOBALBUF Q_DECL_CONSTEXPR static const char
 #define CHR(literal) (literal.data())
-#define SCHR(s) (s.toLatin1().data())
+#define SCHR(s) (s.toUtf8().data())
 #define SCHR_CONST(s) (s.toStdString().c_str())
 #define BARR(literal) (QByteArray(CHR(literal)))
 #define TOQSTR(x) (QString("%1").arg(x))
@@ -284,6 +284,12 @@ inline Q_NORETURN void __not_implemented_impl(const QString& here)
     throw std::runtime_error(s.toStdString());
 }
 #define NOT_IMPLEMENTED __not_implemented_impl(__HERE__);
+
+#ifdef BADWAY_TRAP_FEATURE
+#define BADWAY_TRAP(msg) qFatal("SOMETHING IS WRONG HERE %s (%s)", __HERE__, SCHR_CONST(QString(msg)))
+#else
+#define BADWAY_TRAP(msg) qWarning("(%s) %s", __HERE__, SCHR_CONST(QString(msg)))
+#endif // BADWAY_TRAP
 
 // build info
 #define BUILD_YEAR_CH0 (__DATE__[ 7])
