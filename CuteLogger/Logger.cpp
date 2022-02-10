@@ -609,7 +609,6 @@ static void qtLoggerMessageHandler(QtMsgType type, const char* msg)
 }
 #endif
 
-
 //! Construct the instance of Logger
 /**
  * If you're only using one global instance of logger you wouldn't probably need to use this constructor manually.
@@ -623,6 +622,7 @@ Logger::Logger()
     d->logDevice = new LogDevice(this);
 }
 
+QMutex Logger::m_writeMutex = QMutex(QMutex::Recursive);
 
 //! Construct the instance of Logger and set logger default category
 /**
@@ -1032,7 +1032,7 @@ void Logger::write(LogLevel logLevel, const char* file, int line, const char* fu
 QDebug Logger::write(LogLevel logLevel, const char* file, int line, const char* function, const char* category)
 {
     Q_D(Logger);
-
+    QMutexLocker l(&m_writeMutex);
     d->logDevice->lock(logLevel, file, line, function, category);
     return QDebug(d->logDevice);
 }

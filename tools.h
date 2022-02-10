@@ -35,6 +35,7 @@
 #include "functionscheduler.h"
 #include "ranges.h"
 #include "literals.h"
+#include "stringutils.h"
 
 typedef std::atomic<quint64> counter_t;
 typedef qint64 msTime_t;
@@ -105,32 +106,7 @@ namespace Tools
 
   typedef MOptional<QString> OptionalString;
 
-  template<class T, class U>
-  inline QTextStream& operator<<(QTextStream& out, const QPair<T, U>& pair) {
-      out << "QPair<" << pair.first << pair.second << ">";
-      return out;
-  }
 
-  template<class A, class B>
-  inline QTextStream& operator<<(QTextStream& out, const std::tuple<A, B>& t) {
-      out << "tuple<" << std::get<0>(t) << std::get<1>(t) << ">";
-      return out;
-  }
-
-  template<class A, class B, class C>
-  inline QTextStream& operator<<(QTextStream& out, const std::tuple<A, B, C>& t) {
-      out << "tuple<" << std::get<0>(t) << std::get<1>(t) << std::get<2>(t) << ">";
-      return out;
-  }
-
-  template<typename T>
-  inline QString anyToString (const T& value)
-  {
-      QString s;
-      QTextStream out(&s);
-      out << value;
-      return s;
-  }
 
   template<typename QEnum>
   inline QString QEnumToString (const QEnum value)

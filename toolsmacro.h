@@ -286,7 +286,7 @@ inline Q_NORETURN void __not_implemented_impl(const QString& here)
 #define NOT_IMPLEMENTED __not_implemented_impl(__HERE__);
 
 #ifdef BADWAY_TRAP_FEATURE
-#define BADWAY_TRAP(msg) qFatal("SOMETHING IS WRONG HERE %s (%s)", __HERE__, SCHR_CONST(QString(msg)))
+#define BADWAY_TRAP(msg) qFatal("SOMETHING IS WRONG HERE %s (%s)", __HERE__, QString(msg).toUtf8().data())
 #else
 #define BADWAY_TRAP(msg) qWarning("(%s) %s", __HERE__, SCHR_CONST(QString(msg)))
 #endif // BADWAY_TRAP

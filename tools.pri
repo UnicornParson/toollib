@@ -200,6 +200,7 @@ HEADERS += \
     $$PWD/exceptions/toollibexceptions.h \
     $$PWD/fileutils.h \
     $$PWD/literals.h \
+    $$PWD/stringutils.h \
     $$PWD/xmutexguard.h
 
 SOURCES += \
@@ -207,6 +208,7 @@ SOURCES += \
     $$PWD/exceptions/toolsexception.cpp \
     $$PWD/exceptions/notimplementedexception.cpp \
     $$PWD/fileutils.cpp \
+    $$PWD/stringutils.cpp \
     $$PWD/xmutexguard.cpp
 
 RESOURCES += \
