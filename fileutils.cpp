@@ -4,8 +4,10 @@
 #include <QFileInfo>
 #include "CuteLogger/cuteloggerinc.h"
 #include "performancesensor.h"
+#include "ranges.h"
 
 using namespace Tools;
+using namespace Tools::Ranges;
 
 QByteArray FileUtils::readFile(const QString& filename, bool& isOk)
 {
@@ -103,7 +105,7 @@ bool FileUtils::writeLines(const QString& filename, const QStringList& lines)
 
 QStringList FileUtils::dirList(const QString& path, bool recursive)
 {
-
+    LOG_TRACE(path);
     QDir d(path);
     if(!d.exists() || d.isEmpty())
     {
@@ -118,6 +120,10 @@ QStringList FileUtils::dirList(const QString& path, bool recursive)
     QStringList rc;
     for(const QString& entry : d.entryList())
     {
+        if (inScope(entry.toLower().trimmed(), {".", ".."}))
+        {
+            continue;
+        }
         QString subpath = path + "/" + entry;
         QFileInfo fi(subpath);
         rc.append(entry);
@@ -127,4 +133,34 @@ QStringList FileUtils::dirList(const QString& path, bool recursive)
         }
     }
     return rc;
+}
+
+bool FileUtils::writeJson(const QString& filename, const QtJson::JsonObject& obj)
+{
+    ADD_PERF_SENSOR;
+    QString text;
+    bool isOk = false;
+    do
+    {
+        if (filename.isEmpty())
+        {
+            LOG_WARNING("empty filename");
+            break;
+        }
+
+        QByteArray text = QtJson::serialize(obj);
+        QFile f(filename);
+        if (!f.open(QIODevice::WriteOnly))
+        {
+            LOG_WARNING(QString("cannot open file %1 for write").arg(filename));
+            break;
+        }
+        f.write(text);
+        f.flush();
+        f.close();
+        isOk = true;
+    }
+    while(false);
+    DESTROY_PERF_SENSOR;
+    return isOk;
 }

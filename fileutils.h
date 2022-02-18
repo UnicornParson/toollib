@@ -2,6 +2,7 @@
 #define FILEUTILS_H
 
 #include "toolsmacro.h"
+#include "json.h"
 
 namespace Tools
 {
@@ -16,6 +17,7 @@ public:
     static QStringList readLines(const QString& filename, bool& isOk, bool trim = true);
     static QStringList dirList(const QString& path, bool recursive = true);
     static bool writeLines(const QString& filename, const QStringList& lines);
+    static bool writeJson(const QString& filename, const QtJson::JsonObject& obj);
 }; // class FileUtils
 }; // namespace Tools
 #endif // FILEUTILS_H

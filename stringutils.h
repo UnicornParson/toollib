@@ -1,6 +1,8 @@
 #ifndef STRINGUTILS_H
 #define STRINGUTILS_H
 #include "toolsmacro.h"
+#include "json.h"
+
 namespace Tools
 {
 template<class T, class U>
@@ -67,8 +69,10 @@ public:
             str.append(QString("[(%1) => (%2)]").arg(anyToString(k), anyToString(l[k])));
         }
         return str;
-        return str;
     }
+
+    static QString toString(const QtJson::JsonArray& ja);
+    static QString toString(const QtJson::JsonObject& jo);
 }; // class StringUtils
 }; // namespace Tools
 #endif // STRINGUTILS_H
