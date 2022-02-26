@@ -312,7 +312,7 @@ bool SecurityUtilsEmbeded::selfTest()
     hashCheckData.insert("Q0wMkpIkRs8MMPI8vARx", "da8b35911275ff12c01dae32c75f73a9c6d64a36d59fb13832fd1ba02ea0881c5e9f2e6247450238fe04dab6c60e2c079577913149bced306d2b48952a0a685b");
 
     bool checkHash = true;
-    foreach (QString src, hashCheckData.keys())
+    for (const QString& src: hashCheckData.keys())
     {
       QString tmpHash = QString(getHash(src.toLatin1()));
       if (tmpHash.isEmpty())

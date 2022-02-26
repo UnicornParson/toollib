@@ -137,7 +137,7 @@ namespace Tools
     QString ret;
     QByteArray src = getInstanceIDData();
     QByteArray hash = QCryptographicHash::hash(src, QCryptographicHash::Sha1);
-    ret = QString("%1:%2").arg(QString(hash.toHex())).arg(getPid());
+    ret = QString("%1_%2").arg(QString(hash.toHex())).arg(getPid());
     return ret;
   }
 

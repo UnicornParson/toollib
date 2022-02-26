@@ -146,7 +146,7 @@ void UnitTestBase::skip(bool skip, const QString& reason)
 bool UnitTestBase::isPassed() const
 {
     bool bPassed = true;
-    foreach(QString key, results.keys())
+    for(const QString& key: results.keys())
     {
         TestResult result = results.value(key);
         if (!result.bSuccess)
@@ -160,7 +160,7 @@ bool UnitTestBase::isPassed() const
 
 void UnitTestBase::appendResults(const QHash<QString, TestResult>& rcMap)
 {
-    foreach(QString key, rcMap.keys())
+    for (const QString& key: rcMap.keys())
     {
         results.insert(key, rcMap.value(key));
     }

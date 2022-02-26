@@ -103,6 +103,20 @@ bool FileUtils::writeLines(const QString& filename, const QStringList& lines)
     return isOk;
 }
 
+
+bool FileUtils::checkRequiredFiles(const QString& path, const QStringList& reqList)
+{
+    QStringList list = dirList(path, false);
+    for (const QString& s: reqList)
+    {
+        if(!list.contains(s))
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
 QStringList FileUtils::dirList(const QString& path, bool recursive)
 {
     LOG_TRACE(path);

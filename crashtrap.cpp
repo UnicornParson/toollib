@@ -70,7 +70,7 @@ void CrashTrap::crashHandler(int signal, const QString& msg)
 void CrashTrap::signalHandler( int signum )
 {
     QString msg = QString("unknown signal %d").arg(signum);
-    foreach(SignalPait_t p, HANDLED_SIGNALS)
+    for (const SignalPait_t& p: HANDLED_SIGNALS)
     {
         if (p.first == signum)
         {
@@ -98,7 +98,7 @@ bool CrashTrap::init(const QString &crashDumpBase)
         }
     }
     LOG_TRACE(QString("crash dumps will be saved to ").append(crashDumpBase));
-    foreach(SignalPait_t p, HANDLED_SIGNALS)
+    for (const SignalPait_t& p: HANDLED_SIGNALS)
     {
         LOG_TRACE(QString("add trap to %1(%2)").arg(p.second).arg(p.first));
         ::signal(p.first, &CrashTrap::signalHandler);

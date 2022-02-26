@@ -64,7 +64,7 @@ QList<T> chain(QList<QList<T> > ranges) noexcept
 template< class T >
 inline bool inScope(const T& val, const QList<T>& scope) noexcept
 {
-    foreach(const T& elem, scope)
+    for (const T& elem: scope)
     {
         if (elem == val)
         {

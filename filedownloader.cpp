@@ -254,7 +254,7 @@ void FileDownloader::OnSslErrors(QNetworkReply *reply, const QList<QSslError> &e
          surl = reply->url().toString();
     }
     QString msg = QString("SSL errors for url %1: \n").arg(surl);
-    foreach(QSslError err, errors)
+    for (const QSslError& err: errors)
     {
         msg += QString(" - ").append(err.errorString()).append("\n");
     }

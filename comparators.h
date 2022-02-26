@@ -31,7 +31,7 @@ bool CompareList(QList<T>const& left,
         return false;
     }
     QList<T> tright = right;
-    foreach(T item, left)
+    for (const T& item: left)
     {
         if (!tright.contains(item))
         {
@@ -50,7 +50,7 @@ bool CompareMap(MapType const & left,
     {
         return false;
     }
-    foreach (KeyType key, left.keys())
+    for (const KeyType& key: left.keys())
     {
         if (left.value(key) != right.value(key))
         {
@@ -68,7 +68,7 @@ bool CompareMapD(MapType const & left,
     {
         return false;
     }
-    foreach (KeyType key, left.keys())
+    for (const KeyType& key: left.keys())
     {
         if (!safeCompare<double>(left.value(key), right.value(key)))
         {
@@ -86,7 +86,7 @@ bool CompareMapF(MapType const & left,
     {
         return false;
     }
-    foreach (KeyType key, left.keys())
+    for (const KeyType& key: left.keys())
     {
         if (!safeCompare<float>(left.value(key), right.value(key)))
         {

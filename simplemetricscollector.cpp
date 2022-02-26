@@ -78,7 +78,7 @@ void SimpleMetricsCollector::add(const QString& name, QVariantMap params)
     if (m_instance.m_isEnabled)
     {
         QString sValue;
-        foreach(QVariant param, params)
+        for (const QVariant& param: params)
         {
             sValue += param.toString().append(";");
         }

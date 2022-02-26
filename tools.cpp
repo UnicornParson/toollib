@@ -129,7 +129,7 @@ QString CTools::stringTime()
 bool CTools::checkRequiredKeys(const QtJson::JsonObject& obj, const QStringList& requiredKeys)
 {
     bool bRet = true;
-    foreach(QString key, requiredKeys)
+    for (const QString& key: requiredKeys)
     {
         if (!obj.contains(key))
         {

@@ -179,7 +179,7 @@ void HttpSyncDownloader::onSSLErrors(QNetworkReply* r, const QList<QSslError> &e
     m_httpRequestAborted = true;
 
     QString msg = QString("SSL error on url %1: ").arg(getSURL(r));
-    foreach (QSslError e, errors)
+    for (const QSslError& e: errors)
     {
         msg += e.errorString() + "; ";
     }

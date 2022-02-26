@@ -3,9 +3,11 @@
 #include <bitset>
 #include "lzma/lzma.h"
 #include "Updatable.h"
+#include <functional>
 
 using namespace Tools;
 using namespace QtJson;
+
 namespace
 {
   MAYBE_UNUSED_ATTR Q_DECL_CONSTEXPR int ITERATION_COUNT = 200;
@@ -353,7 +355,7 @@ void ToolsTest::dirPathUtilsTest()
   m_lastFailReason.clear();
   bool result = true;
 
-  foreach(dirRecord record, DirData::DIR_RECORDS)
+  for (const dirRecord& record: DirData::DIR_RECORDS)
   {
     QString orig = DirData::_getOriginalDirStr(record);
     QString expected = DirData::_getExpectedDirStr(record);
@@ -496,6 +498,21 @@ void ToolsTest::functionSchedulerTest()
   logTestEnd(QString(Q_FUNC_INFO), result, m_lastFailReason);
 }
 
+uint ToolsTest::updater(const Updatable<uint>::UpdatableCtx& ctx)
+    {
+      TickCounter t;
+      uint v = longCalc(ctx.prev);
+      if (m_updaterExpectedValue == v)
+      {
+        LOG_TRACE("updater. new: %u, prev: %u. time: %llu ms", v, ctx.prev, t.tickToMs());
+      }
+      else
+      {
+        LOG_ERROR("updater. not expected result. new: %u prev: %u. time: %llu ms", v, ctx.prev, t.tickToMs());
+      }
+      return v;
+    };
+
 void ToolsTest::updatableTest()
 {
   logTestStart(QString(Q_FUNC_INFO));
@@ -515,25 +532,13 @@ void ToolsTest::updatableTest()
       m_onUpdateFinishedValue = newVal;
       m_onUpdateFinishedPrev = prevVal;
     };
-    auto updater = [this](const Updatable<uint>::UpdatableCtx& ctx)
-    {
-      TickCounter t;
-      uint v = longCalc(ctx.prev);
-      if (m_updaterExpectedValue == v)
-      {
-        LOG_TRACE("updater. new: %u, prev: %u. time: %llu ms", v, ctx.prev, t.tickToMs());
-      }
-      else
-      {
-        LOG_ERROR("updater. not expected result. new: %u prev: %u. time: %llu ms", v, ctx.prev, t.tickToMs());
-      }
-      return v;
-    };
+
     const uint firstValue = 10;
     Updatable<uint> upd(firstValue);
     m_updaterExpectedValue = longCalc(firstValue);
     upd.setOnValueUpdatedFunct(OnValueUpdatedFunct);
     upd.setOnUpdateFinishedFunct(OnValueUpdateFinishedFunct);
+    const Updatable<uint>::UpdaterFunct_t& updater = std::bind(&ToolsTest::updater, this, std::placeholders::_1);
     upd.setUpdater(updater);
 
     if (!subTest(QString(Q_FUNC_INFO),

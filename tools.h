@@ -137,7 +137,7 @@ namespace Tools
   {
     QStringList ret;
     QList<QEnum> l = QEnumToList<QEnum>();
-    foreach(QEnum e, l)
+    for (const QEnum& e: l)
     {
       QString s = QEnumToString<QEnum>(e);
       if (!s.isEmpty())

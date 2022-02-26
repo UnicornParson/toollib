@@ -201,6 +201,7 @@ HEADERS += \
     $$PWD/fileutils.h \
     $$PWD/literals.h \
     $$PWD/stringutils.h \
+    $$PWD/threadrunner.h \
     $$PWD/xmutexguard.h
 
 SOURCES += \
@@ -209,6 +210,7 @@ SOURCES += \
     $$PWD/exceptions/notimplementedexception.cpp \
     $$PWD/fileutils.cpp \
     $$PWD/stringutils.cpp \
+    $$PWD/threadrunner.cpp \
     $$PWD/xmutexguard.cpp
 
 RESOURCES += \

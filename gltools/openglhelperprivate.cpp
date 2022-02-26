@@ -158,7 +158,7 @@ void OpenglHelperPrivate::updateVersionFlags()
 
 bool OpenglHelperPrivate::checkVersionFlags(const QList<eVersionFlag> &flags)
 {
-  foreach(eVersionFlag f, flags)
+  for (eVersionFlag f: flags)
   {
     if (!m_versionFlags.at(f))
     {

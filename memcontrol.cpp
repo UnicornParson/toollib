@@ -152,9 +152,9 @@ void MemControlPrivateCSV::write(const QString& msg)
     XMUTEX_LOCK(m_fileMutex);
     if (dirtyCache)
     {
-        foreach (QString record, m_cache)
+        for (const QString& record: m_cache)
         {
-            m_file.write(record.toLatin1());
+            m_file.write(record.toUtf8());
         }
     }
     m_file.write(msg.toLatin1());

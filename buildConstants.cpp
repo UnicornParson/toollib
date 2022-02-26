@@ -6,7 +6,7 @@ using namespace Tools;
 QString ConstantsHelper::getFeaturesStr(const QString& separator)
 {
     QString sList;
-    foreach(QString s, BUILDCFG_FEATURES)
+    for (const QString& s: BUILDCFG_FEATURES)
     {
         if (s == QString(FEATURES_END) || s.trimmed().isEmpty())
         {

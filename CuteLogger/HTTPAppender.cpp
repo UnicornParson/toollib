@@ -149,8 +149,8 @@ void HTTPAppender::slotAuthenticationRequired(QNetworkReply *reply, QAuthenticat
 void HTTPAppender::sslErrors(QNetworkReply* reply, const QList<QSslError> &errors)
 {
   (void)reply;
-  QString errorMsg = "SSL error ";
-  foreach(QSslError err, errors)
+  QString errorMsg("SSL error ");
+  for (const QSslError& err: errors)
   {
     errorMsg.append(err.errorString() + "; ");
   }

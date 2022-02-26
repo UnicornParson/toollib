@@ -1,7 +1,7 @@
 #ifndef TOOLSTEST_H
 #define TOOLSTEST_H
 #include "unittestbase.h"
-
+#include "Updatable.h"
 #include <QObject>
 
 namespace Tools
@@ -49,6 +49,8 @@ protected:
     void downloaderResult();
     void functionSchedulerTest();
 private:
+    uint updater(const Updatable<uint>::UpdatableCtx& ctx);
+
     uint longCalc(uint v);
     uint m_onUpdatedValue;
     uint m_onUpdateFinishedValue;

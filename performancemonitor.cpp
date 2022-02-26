@@ -64,7 +64,7 @@ void PerformanceMonitor::printMetrics(const metricsPack &pack)
     LOG_TRACE(QString("Full measurement count: %1").arg(pack.measurementCount));
     LOG_TRACE_LINE;
     int traceRowIndex = 0;
-    foreach(QString token, pack.metrics.keys())
+    for (const QString& token: pack.metrics.keys())
     {
         metricsStat stat = pack.metrics.value(token);
         LOG_TRACE(QString(" - [%1] %2 - min: %3, max: %4, avg: %5, count: %6")
@@ -89,7 +89,7 @@ metricsStat PerformanceMonitor::getStat(const MeasurementSet_t& set)
     stat.max = 0;
     stat.min = 0;
     stat.count = quint64( set.size());
-    foreach(MeasurementTime_t time, set)
+    for (const MeasurementTime_t& time: set)
     {
         avg += double(time) / dsize;
         stat.max = qMax<MeasurementTime_t>(stat.max, time);
@@ -117,7 +117,7 @@ metricsPack PerformanceMonitor::buildMetrics()
     pack.measurementCount = dataSize;
     LOG_TRACE(QString("Measurements count: %1").arg(dataSize));
     metricsStat stat;
-    foreach (QString token, dataClone.keys())
+    for (const QString& token: dataClone.keys())
     {
         stat = getStat(dataClone.value(token));
         pack.metrics.insert(token, stat);
@@ -148,7 +148,7 @@ bool PerformanceMonitor::saveAsSCV(const QString& path, const metricsPack& pack)
         //Index,Token,Min,Max,Avg
         f.write(QString(CSV_HEADER).toLatin1());
         quint64 traceRowIndex = 0;
-        foreach(QString token, pack.metrics.keys())
+        for (const QString& token: pack.metrics.keys())
         {
             metricsStat stat = pack.metrics.value(token);
             f.write(QString("%1;%2;%3;%4;%5;%6\n")
