@@ -2,6 +2,7 @@
 #include <QFile>
 
 #include "tools.h"
+#include "fileutils.h"
 
 using namespace Tools;
 
@@ -35,15 +36,7 @@ bool IJSerializable::fromFile(const QString& path)
       LOG_ERROR("empty path");
       break;
     }
-    QFile f(path);
-    if (!f.open(QIODevice::ReadOnly))
-    {
-      LOG_ERROR(QString("cannot open file %1 for read").arg(path));
-      break;
-    }
-    QByteArray data = f.readAll();
-    f.close();
-    QtJson::JsonObject obj = QtJson::parse(QString(data), rc).toMap();
+    QtJson::JsonObject obj = FileUtils::readJson(path, rc);
     if (!rc)
     {
       LOG_ERROR(QString("cannot parse file %1. it's not a valid json").arg(path));

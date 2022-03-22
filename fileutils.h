@@ -19,6 +19,7 @@ public:
     static bool checkRequiredFiles(const QString& path, const QStringList& reqList);
     static bool writeLines(const QString& filename, const QStringList& lines);
     static bool writeJson(const QString& filename, const QtJson::JsonObject& obj);
+    static QtJson::JsonObject readJson(const QString& filename, bool& isOk);
 }; // class FileUtils
 }; // namespace Tools
 #endif // FILEUTILS_H

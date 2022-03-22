@@ -103,7 +103,6 @@ bool FileUtils::writeLines(const QString& filename, const QStringList& lines)
     return isOk;
 }
 
-
 bool FileUtils::checkRequiredFiles(const QString& path, const QStringList& reqList)
 {
     QStringList list = dirList(path, false);
@@ -152,7 +151,6 @@ QStringList FileUtils::dirList(const QString& path, bool recursive)
 bool FileUtils::writeJson(const QString& filename, const QtJson::JsonObject& obj)
 {
     ADD_PERF_SENSOR;
-    QString text;
     bool isOk = false;
     do
     {
@@ -177,4 +175,39 @@ bool FileUtils::writeJson(const QString& filename, const QtJson::JsonObject& obj
     while(false);
     DESTROY_PERF_SENSOR;
     return isOk;
+}
+
+QtJson::JsonObject FileUtils::readJson(const QString& filename, bool& isOk)
+{
+    isOk = false;
+    QtJson::JsonObject obj;
+    do
+    {
+        if (filename.isEmpty())
+        {
+            LOG_ERROR("empty path");
+            break;
+        }
+
+        QFile f(filename);
+        if (!f.open(QIODevice::ReadOnly))
+        {
+            LOG_ERROR(QString("cannot open file %1 for read").arg(filename));
+            break;
+        }
+        QByteArray data = f.readAll();
+        f.close();
+        obj = QtJson::parse(QString(data), isOk).toMap();
+        if (!isOk)
+        {
+            LOG_ERROR(QString("cannot parse file %1. it's not a valid json").arg(filename));
+            break;
+        }
+    }
+    while(false);
+    if(!isOk)
+    {
+        obj.clear();
+    }
+    return obj;
 }
