@@ -128,7 +128,7 @@ class  Logger
                const QString& message, bool fromLocalInstance);
     Q_DECLARE_PRIVATE(Logger)
     LoggerPrivate* d_ptr;
-    static QMutex m_writeMutex;
+    static QRecursiveMutex m_writeMutex;
 };
 
 

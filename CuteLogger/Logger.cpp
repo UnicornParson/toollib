@@ -34,7 +34,7 @@
 #include <iostream>
 
 #include "logglobalsetup.h"
-
+#include "toolsmacro.h"
 /**
  * \file Logger.h
  * \brief A file containing the description of Logger class and and additional useful macros for logging
@@ -622,7 +622,7 @@ Logger::Logger()
     d->logDevice = new LogDevice(this);
 }
 
-QMutex Logger::m_writeMutex = QMutex(QMutex::Recursive);
+QRecursiveMutex Logger::m_writeMutex = QRecursiveMutex();
 
 //! Construct the instance of Logger and set logger default category
 /**

@@ -3,6 +3,7 @@
 
 #include <QAtomicInt>
 #include <functional>
+#include <stdexcept>
 
 namespace Tools
 {

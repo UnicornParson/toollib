@@ -4,11 +4,12 @@
 #include <QFileInfo>
 #include "CuteLogger/cuteloggerinc.h"
 #include "performancesensor.h"
+#include "qregexp.h"
 #include "ranges.h"
 
 using namespace Tools;
 using namespace Tools::Ranges;
-
+static const QRegularExpression endlineRegexp("\n|\r\n|\r");
 QByteArray FileUtils::readFile(const QString& filename, bool& isOk)
 {
     ADD_PERF_SENSOR;
@@ -46,7 +47,7 @@ QStringList FileUtils::readLines(const QString& filename, bool& isOk, bool trim)
     {
         QByteArray b = readFile(filename, isOk);
 
-        QStringList tmp = QString(b).split(QRegExp("\n|\r\n|\r"), QT_SKIP_EMPTY_PARTS);
+        QStringList tmp = QString(b).split(endlineRegexp, QT_SKIP_EMPTY_PARTS);
         for(const QString& s: tmp)
         {
             QString s1 = s;

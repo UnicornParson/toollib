@@ -158,5 +158,19 @@ QList<T> inline filter(QList<T> in, const std::function<bool(const T&)>& functor
     return out;
 }
 
+template< class T>
+QList<T> inline unique(QList<T> in)
+{
+   QList<T> out;
+   for(const T& entry: in)
+   {
+       if(!out.contains(entry))
+       {
+           out.append(entry);
+       }
+   }
+   return out;
+}
+
 } // namespace Tools::Ranges
 #endif // RANGES_H
