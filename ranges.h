@@ -16,8 +16,6 @@ inline bool inRange(const T& val, const T& rangeMin, const T& rangeMax) noexcept
     return (val <= rangeMax) && (val >= rangeMin);
 }
 
-
-
 template< typename T, typename = typename std::enable_if<std::is_arithmetic<T>::value, T>::type>
 inline QList<T> range(const T& min, const T& max, const T& step) noexcept
 {

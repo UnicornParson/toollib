@@ -23,6 +23,36 @@ inline QTextStream& operator<<(QTextStream& out, const std::tuple<A, B, C>& t) {
     return out;
 }
 
+inline QTextStream& operator<<(QTextStream& out, const QVariantList& l)
+{
+    out << "QVariantList[";
+    bool first = true;
+    for(const QVariant& v: l)
+    {
+        if(!first)
+        {
+            out << ", ";
+        }
+        first = false;
+        out << v.toString();
+    }
+    out << "]";
+    return out;
+}
+
+inline QTextStream& operator<<(QTextStream& out, const QVariant& v)
+{
+    if(!v.isNull())
+    {
+        out << v.toString();
+    }
+    else
+    {
+        out << "null";
+    }
+    return out;
+}
+
 template<typename T>
 inline QString anyToString (const T& value)
 {
