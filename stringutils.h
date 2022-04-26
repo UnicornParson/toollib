@@ -103,6 +103,8 @@ public:
 
     static QString toString(const QtJson::JsonArray& ja);
     static QString toString(const QtJson::JsonObject& jo);
+
+    static QStringList splitLines(const QString& in);
 }; // class StringUtils
 }; // namespace Tools
 #endif // STRINGUTILS_H

@@ -109,7 +109,7 @@ namespace Tools
 
 
   template<typename QEnum>
-  inline QString QEnumToString (const QEnum value)
+  inline QString QEnumToString (const QEnum& value)
   {
     return QMetaEnum::fromType<QEnum>().valueToKey(value);
   }
