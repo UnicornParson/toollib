@@ -160,8 +160,8 @@ HEADERS += \
     $$PWD/functionscheduler.h\
     $$PWD/buildConstants.h \
     $$PWD/responseobject.h \
-    $$PWD/ranges.h
-
+    $$PWD/ranges.h \
+    $$PWD/wachedvariable.h
 SOURCES += \
     $$PWD/tools.cpp \
     $$PWD/json.cpp \
@@ -187,7 +187,8 @@ SOURCES += \
     $$PWD/idfactory.cpp \
     $$PWD/version.cpp \
     $$PWD/functionscheduler.cpp\
-    $$PWD/buildConstants.cpp
+    $$PWD/buildConstants.cpp \
+    $$PWD/wachedvariable.cpp
 
 
 win32: DEFINES+=PLATFORM_WINDOWS

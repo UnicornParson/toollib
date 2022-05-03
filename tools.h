@@ -71,7 +71,7 @@ namespace QtJson
 {
     inline bool checkTags(const QtJson::JsonObject& obj, const QStringList& requiredTags)
     {
-        for(QString t: requiredTags)
+        for(const QString &t: requiredTags)
         {
             if (!obj.contains(t))
             {
@@ -181,8 +181,5 @@ namespace Tools
     Q_DISABLE_COPY_MOVE(CTools)
   };
   //typedef
-
-
-
 } // namespace Tools
 #endif // TOOLS_H
