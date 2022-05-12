@@ -33,7 +33,7 @@ CONFIG += c++17
 
 CONFIG(release, debug|release) {
     # Release ptimizations
-    QMAKE_CXXFLAGS += -flto -O3
+    QMAKE_CXXFLAGS += -flto -O4
 }
 
 QT += network xml core concurrent
@@ -51,25 +51,12 @@ SOURCES += \
   $$PWD/crashtrapnoop.cpp
 
 
-CONFIG(NO_OPENSSL_LIB) {
-  message("build without openssl libs")
-  DEFINES += "NO_OPENSSL_LIB"
-  HEADERS += $$PWD/qaesencryption.h
-  SOURCES += $$PWD/qaesencryption.cpp
-} else {
-  OPENSSL_PATH=$$PWD/openssl
-  INCLUDEPATH += $$OPENSSL_PATH/include
 
-  win32:contains(QMAKE_HOST.arch, x86_64) {
-    message("Using x64 arch")
-    PRE_TARGETDEPS += $$OPENSSL_PATH/x64/lib/libssl.a $$OPENSSL_PATH/x64/lib/libcrypto.a
-    LIBS += -L$${OPENSSL_PATH}/x64/lib -llibssl -llibcrypto -luser32 -lgdi32 -lwsock32 -lws2_32 -lcrypt32 -ladvapi32
-  } else {
-    message("Using x32 arch")
-    PRE_TARGETDEPS += $$OPENSSL_PATH/x32/lib/libssl.a $$OPENSSL_PATH/x32/lib/libcrypto.a
-    LIBS += -L$${OPENSSL_PATH}/x32/lib -llibssl -llibcrypto -luser32 -lgdi32 -lwsock32 -lws2_32 -lcrypt32 -ladvapi32 -lgdi32
-  }
-}
+message("build without openssl libs")
+DEFINES += "NO_OPENSSL_LIB"
+HEADERS += $$PWD/qaesencryption.h
+SOURCES += $$PWD/qaesencryption.cpp
+
 
 CONFIG(TOOLLIB_OPENGL) {
   message("ToolLib: OpenGL feature: on")

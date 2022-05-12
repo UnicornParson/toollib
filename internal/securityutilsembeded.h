@@ -50,10 +50,6 @@ public:
   static QByteArray getSignedFingerprint(const QByteArray& in);
   static bool verifySignedFingerprint(const QByteArray& in);
 private:
-
-#ifndef SECURITY_UTILS_NO_EXCEPT
-  [[noreturn]]
-#endif
   static void LogError(const QString& error);
 
   SecurityUtilsEmbeded();

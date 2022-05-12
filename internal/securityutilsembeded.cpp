@@ -71,7 +71,7 @@ QByteArray SecurityUtilsEmbeded::Base64Encode(const QByteArray& in)
 
 QString SecurityUtilsEmbeded::Base64Encode(const QString& in)
 {
-  QByteArray baIn = in.toUtf8();
+  const QByteArray baIn = in.toUtf8();
   return QString(Base64Encode(baIn));
 }
 
@@ -82,7 +82,7 @@ QByteArray SecurityUtilsEmbeded::Base64Decode(const QByteArray& in)
 
 QString SecurityUtilsEmbeded::Base64Decode(const QString& in)
 {
-  QByteArray baIn = in.toUtf8();
+  const QByteArray baIn = in.toUtf8();
   return QString(Base64Decode(baIn));
 }
 
