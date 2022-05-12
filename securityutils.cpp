@@ -297,7 +297,7 @@ bool SecurityUtils::selfTest()
 
     const int HashIterationCount = 10;
     bRet = true;
-    for(int i = 0; i < HashIterationCount; ++i)
+    for (int i = 0; i < HashIterationCount; ++i)
     {
       QByteArray tmpHash = getHash(randBuf);
       if (tmpHash != hash)
@@ -326,7 +326,7 @@ bool SecurityUtils::selfTest()
 void SecurityUtils::secureErase(char* ptr, size_t size)
 {
   volatile char* p = ptr;
-  for(size_t i = 0; i < size; ++i)
+  for (size_t i = 0; i < size; ++i)
   {
     *p = 0;
   }

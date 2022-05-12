@@ -152,7 +152,7 @@ void ToolsTest::cToolsTest()
 
     QHash<QString, QString> hMapFirst;
     QHash<QString, QString> hMapSecond;
-    for(int i = 0; i < ITERATION_COUNT; ++i)
+    for (int i = 0; i < ITERATION_COUNT; ++i)
     {
       QString key = QString("%1.%2").arg(CTools::getUUID()).arg(i);
       QString val = QString("%1.%2").arg(CTools::getUUID()).arg(i);
@@ -176,7 +176,7 @@ void ToolsTest::cToolsTest()
     //compare maps with double value
     QMap<QString, double> dMapFirst;
     QMap<QString, double> dMapSecond;
-    for(int i = 0; i < ITERATION_COUNT; ++i)
+    for (int i = 0; i < ITERATION_COUNT; ++i)
     {
       QString key = QString("%1.%2").arg(CTools::getUUID()).arg(i);
       double val = double(rand()) / 333.3;
@@ -215,7 +215,7 @@ void ToolsTest::jsonTest()
   {
     JsonObject firstObj;
     JsonArray firstArray;
-    for(int i = 0; i < ITERATION_COUNT; ++i)
+    for (int i = 0; i < ITERATION_COUNT; ++i)
     {
       QString str = QString("%1.%2").arg(time(nullptr)).arg(i);
       firstArray.append(str);
@@ -279,7 +279,7 @@ void ToolsTest::lzmaTest()
   do
   {
     QByteArray in;
-    for(int i = 0; i < TEST_BUFF_SIZE; ++i )
+    for (int i = 0; i < TEST_BUFF_SIZE; ++i )
     {
       in.append(static_cast<char>(i % 0xff));
     }
@@ -341,7 +341,7 @@ void ToolsTest::lzmaTest()
 
 uint ToolsTest::longCalc(uint v)
 {
-  for(uint i = 0; i < UPDATER_ROUNDS_COUNT; ++i)
+  for (uint i = 0; i < UPDATER_ROUNDS_COUNT; ++i)
   {
     v = qHash(v + i, i);
     LOG_TRACE("longCalc. iteration %u val %u", i, v);
@@ -448,7 +448,7 @@ void ToolsTest::functionSchedulerTest()
       throw std::runtime_error(TestRuntimeExceptionText.data());
     };
 
-    for(int i = 0; i < ITERATION_COUNT; ++i)
+    for (int i = 0; i < ITERATION_COUNT; ++i)
     {
       scheduleOnce(throwableRoutine, DEFAULT_DELAY, ec, rec);
       scheduleOnce(throwableRuntimeExceptionRoutine, DEFAULT_DELAY, ec, rec);
@@ -477,7 +477,7 @@ void ToolsTest::functionSchedulerTest()
     };
 
     FunctionScheduler::reset();
-    for(int i = 0; i < ITERATION_COUNT; ++i)
+    for (int i = 0; i < ITERATION_COUNT; ++i)
     {
       setInterval(cleanRoutine, DEFAULT_DELAY, ec, rec);
     }

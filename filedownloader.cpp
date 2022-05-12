@@ -237,7 +237,7 @@ void FileDownloader::OnHttpReadyRead()
 void FileDownloader::OnReplyFinished(QNetworkReply* pReply)
 {
 QString surl;
-if(pReply != nullptr)
+if (pReply != nullptr)
 {
      surl = pReply->url().toString();
 }

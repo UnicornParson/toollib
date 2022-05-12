@@ -67,7 +67,7 @@ QString ConfigManager::removeComments(const QString& content) const
 {
     QString ret;
     QStringList lines = content.trimmed().split('\n', QT_SKIP_EMPTY_PARTS);
-    for(const QString &line: lines)
+    for (const QString &line: lines)
     {
         QString s = line.trimmed();
         if (s.isEmpty() || s.startsWith(JSON_COMMENT_PREFIX))
@@ -198,7 +198,7 @@ bool ConfigManager::appendJsonMulti(const QList<ConfigSeqEntry>& queue, const QS
             }
         }
         }
-        if(restoreStable)
+        if (restoreStable)
         {
             LOG_WARNING("restore last stable configuration");
             m_params = std::move(m_latestStable);
@@ -433,12 +433,12 @@ bool ConfigManager::checkParam(const QString& path, const ConfigParamChecker_fun
 {
     XMutexGuard<XRecursiveMutex> g(&m_treeMutex);
 
-    if(m_params.contains(path.toLower()))
+    if (m_params.contains(path.toLower()))
     {
         return checker(m_params[path.toLower()]);
     }
 
-    if(m_runtimeParams.contains(path.toLower()))
+    if (m_runtimeParams.contains(path.toLower()))
     {
         return checker(m_runtimeParams[path.toLower()]);
     }
@@ -525,7 +525,7 @@ QStringList ConfigManager::getDump()
     ADD_PERF_SENSOR;
     QStringList list;
     XMutexGuard<XRecursiveMutex> g(&m_treeMutex);
-    for(const QString& key: m_params.keys())
+    for (const QString& key: m_params.keys())
     {
         bool ok = false;
         QVariant actual = getParam(key, ok);
@@ -541,7 +541,7 @@ QStringList ConfigManager::getDump()
 
 void ConfigManager::printDump()
 {
-    for(const QString& line: getDump())
+    for (const QString& line: getDump())
     {
         LOG_TRACE(line);
     }
@@ -550,7 +550,7 @@ void ConfigManager::printDump()
 QString ConfigManager::getDumpString()
 {
     QString dumpTest;
-    for(const QString& line: getDump())
+    for (const QString& line: getDump())
     {
         dumpTest += line + "\n";
     }

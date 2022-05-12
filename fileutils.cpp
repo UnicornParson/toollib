@@ -49,21 +49,21 @@ QStringList FileUtils::readLines(const QString& filename, bool& isOk, bool trim)
         QByteArray b = readFile(filename, isOk);
 
         QStringList tmp = StringUtils::splitLines(QString(b));
-        for(const QString& s: tmp)
+        for (const QString& s: tmp)
         {
             QString s1 = s;
-            if(trim)
+            if (trim)
             {
                 s1 = s.trimmed();
             }
-            if(!s1.isEmpty())
+            if (!s1.isEmpty())
             {
                 list.append(s1);
             }
         }
     }
     while(false);
-    if(!isOk)
+    if (!isOk)
     {
         list.empty();
     }
@@ -84,7 +84,7 @@ bool FileUtils::writeLines(const QString& filename, const QStringList& lines)
             break;
         }
 
-        for(const QString& s: lines)
+        for (const QString& s: lines)
         {
             text.append(s).append("\n");
         }
@@ -110,7 +110,7 @@ bool FileUtils::checkRequiredFiles(const QString& path, const QStringList& reqLi
     QStringList list = dirList(path, false);
     for (const QString& s: reqList)
     {
-        if(!list.contains(s))
+        if (!list.contains(s))
         {
             return false;
         }
@@ -122,18 +122,18 @@ QStringList FileUtils::dirList(const QString& path, bool recursive)
 {
     LOG_TRACE(path);
     QDir d(path);
-    if(!d.exists() || d.isEmpty())
+    if (!d.exists() || d.isEmpty())
     {
         return QStringList();
     }
 
-    if(!recursive)
+    if (!recursive)
     {
         return d.entryList();
     }
 
     QStringList rc;
-    for(const QString& entry : d.entryList())
+    for (const QString& entry : d.entryList())
     {
         if (inScope(entry.toLower().trimmed(), {".", ".."}))
         {
@@ -142,7 +142,7 @@ QStringList FileUtils::dirList(const QString& path, bool recursive)
         QString subpath = path + "/" + entry;
         QFileInfo fi(subpath);
         rc.append(entry);
-        if(fi.isDir())
+        if (fi.isDir())
         {
             rc.append(dirList(subpath, true));
         }
@@ -207,7 +207,7 @@ QtJson::JsonObject FileUtils::readJson(const QString& filename, bool& isOk)
         }
     }
     while(false);
-    if(!isOk)
+    if (!isOk)
     {
         obj.clear();
     }

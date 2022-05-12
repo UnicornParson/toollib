@@ -83,7 +83,7 @@ void AsyncMetricsCollector::Writer::run()
 
                 if (!header.isEmpty())
                 {
-                    for(QString hname: header)
+                    for (QString hname: header)
                     {
                         if (!first)
                         {
@@ -98,7 +98,7 @@ void AsyncMetricsCollector::Writer::run()
                         {
                             strRow += hname;
                         }
-                    } //for(QString hname: header)
+                    } //for (QString hname: header)
                     info.file->write(strRow.append(ENDL_UNIX).toLatin1());
                 } // if (!header.isEmpty())
             } // if (!info.isUsed)
@@ -112,7 +112,7 @@ void AsyncMetricsCollector::Writer::run()
             {
                 continue;
             }
-            for(QString rname: row)
+            for (QString rname: row)
             {
                 if (!first)
                 {
@@ -127,7 +127,7 @@ void AsyncMetricsCollector::Writer::run()
                 {
                     strRow += rname;
                 }
-            } //for(QString hname: header)
+            } //for (QString hname: header)
             strRow += ENDL_UNIX;
             info.file->write(strRow.toLatin1());
             info.file->flush();
@@ -172,7 +172,7 @@ bool AsyncMetricsCollector::init(const QMap<uint, QString>& categories, const QS
         }
         m_baseDir = CTools::pathNormalize(baseDir.trimmed());
 
-        for(uint k: categories.keys())
+        for (uint k: categories.keys())
         {
             QString v = categories.value(k).trimmed();
             if (!v.isEmpty())
@@ -200,7 +200,7 @@ void AsyncMetricsCollector::destroy()
     m_isActive = false;
     CTools::SyncThreadTerminate(&m_writer);
 
-    for(categoryInfo info : m_categories.values())
+    for (categoryInfo info : m_categories.values())
     {
         if (info.file != nullptr)
         {

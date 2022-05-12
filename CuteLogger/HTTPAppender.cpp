@@ -105,7 +105,7 @@ QString HTTPAppender::base64_encode(QString string)
 QString HTTPAppender::_queueMessage::buildDataString()
 {
   //incorrcect decoding of symbols "<" and ">"
-  for(int i = 0; i < message.size(); ++i)
+  for (int i = 0; i < message.size(); ++i)
   {
     int li = message.indexOf('<');
     if (li != -1)

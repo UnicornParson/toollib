@@ -444,7 +444,7 @@ namespace QtJson {
     static int lastIndexOfNumber(const QString &json, int index) {
         int lastIndex;
 
-        for(lastIndex = index; lastIndex < json.size(); lastIndex++) {
+        for (lastIndex = index; lastIndex < json.size(); lastIndex++) {
             if (QString("0123456789+-.eE").indexOf(json[lastIndex]) == -1) {
                 break;
             }
@@ -457,7 +457,7 @@ namespace QtJson {
      * eatWhitespace
      */
     static void eatWhitespace(const QString &json, int &index) {
-        for(; index < json.size(); index++) {
+        for (; index < json.size(); index++) {
             if (QString(" \t\n\r").indexOf(json[index]) == -1) {
                 break;
             }

@@ -43,7 +43,7 @@ QtJson::JsonObject UnitTestPrinterInternal::toJson(const QHash<QString, UnitTest
     uint failed = 0;
     QtJson::JsonArray failedMessages;
     QtJson::JsonArray passedMessages;
-    for(const QString& key: results.keys())
+    for (const QString& key: results.keys())
     {
         QtJson::JsonObject entry;
         QString reasonMsg = "";
@@ -91,7 +91,7 @@ QString UnitTestPrinterInternal::toPlain(const QHash<QString, UnitTestBase::Test
     uint failed = 0;
     QStringList failedMessages;
     QStringList passedMessages;
-    for(const QString& key: results.keys())
+    for (const QString& key: results.keys())
     {
         QString reasonMsg = "";
 
@@ -116,7 +116,7 @@ QString UnitTestPrinterInternal::toPlain(const QHash<QString, UnitTestBase::Test
         }
     }
     passedMessages.sort();
-    for(const QString& m: passedMessages)
+    for (const QString& m: passedMessages)
     {
         msg += (m + StringEndl);
     }
@@ -136,7 +136,7 @@ QString UnitTestPrinterInternal::toPlain(const QHash<QString, UnitTestBase::Test
         msg += StringLine + StringEndl;
         msg +=("FAILED TESTS:"_s + StringEndl);
         failedMessages.sort();
-        for(const QString& m: failedMessages)
+        for (const QString& m: failedMessages)
         {
             msg += (m + StringEndl);
         }
@@ -158,32 +158,32 @@ QString UnitTestPrinterInternal::toHtml(const QHash<QString, UnitTestBase::TestR
     bool templatesRc = false;
 
     const QString HtmlHeader(getHtmlTemplate(HtmlHeaderPath, templatesRc));
-    if(!templatesRc)
+    if (!templatesRc)
     {
         LOG_ERROR("cannot load HtmlHeader template");
         return QString();
     }
     const QString BodyHeader(getHtmlTemplate(BodyHeaderPath, templatesRc));
-    if(!templatesRc)
+    if (!templatesRc)
     {
         LOG_ERROR("cannot load BodyHeader template");
         return QString();
     }
     const QString HtmlFooter(getHtmlTemplate(HtmlFooterPath, templatesRc));
-    if(!templatesRc)
+    if (!templatesRc)
     {
         LOG_ERROR("cannot load HtmlFooter template");
         return QString();
     }
     const QString BodyFooter(getHtmlTemplate(BodyFooterPath, templatesRc));
-    if(!templatesRc)
+    if (!templatesRc)
     {
         LOG_ERROR("cannot load BodyFooter template");
         return QString();
     }
 
     QString msg(HtmlHeader);
-    for(const QString& key: results.keys())
+    for (const QString& key: results.keys())
     {
         QString reasonMsg = "";
 
@@ -218,11 +218,11 @@ QString UnitTestPrinterInternal::toHtml(const QHash<QString, UnitTestBase::TestR
     msg += QString(BodyHeader).arg((failed == 0) ? ColorSuccess : ColorFail).arg(HeaderTitle, summary);
     passedMessages.sort();
     failedMessages.sort();
-    for(const QString& m: failedMessages)
+    for (const QString& m: failedMessages)
     {
         msg += (m + StringEndl);
     }
-    for(const QString& m: passedMessages)
+    for (const QString& m: passedMessages)
     {
         msg += (m + StringEndl);
     }

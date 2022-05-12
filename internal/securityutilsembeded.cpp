@@ -196,7 +196,7 @@ int SecurityUtilsEmbeded::RandBytes(unsigned char* ptr, size_t count)
   }
   secureErase(ptr, count);
 
-  for(size_t i = 0; i < count; ++i)
+  for (size_t i = 0; i < count; ++i)
   {
     ptr[i] = static_cast<unsigned char>(SecurityUtilsEmbeded::rand(0, 0xff));
   }
@@ -269,7 +269,7 @@ bool SecurityUtilsEmbeded::selfTest()
     unsigned char rbuf[bufSize];
     RandBytes(rbuf, bufSize);
     secureErase(rbuf, bufSize);
-    for(size_t i = 0; i < bufSize; ++i)
+    for (size_t i = 0; i < bufSize; ++i)
     {
       if (rbuf[i] != 0)
       {
@@ -340,7 +340,7 @@ bool SecurityUtilsEmbeded::selfTest()
     const int nAesTestIterationCount = 10;
     const int nAesTestKeySize = 2048;
     const int nAesTestDataSize = 1024;
-    for(int i = 0; i < nAesTestIterationCount; ++i)
+    for (int i = 0; i < nAesTestIterationCount; ++i)
     {
       QByteArray aesKey(RandBytes(nAesTestKeySize));
       QByteArray aesSrc(RandBytes(nAesTestDataSize));
@@ -402,7 +402,7 @@ bool SecurityUtilsEmbeded::selfTest()
 void SecurityUtilsEmbeded::secureErase(char* ptr, size_t size)
 {
   volatile char* p = ptr;
-  for(size_t i = 0; i < size; ++i)
+  for (size_t i = 0; i < size; ++i)
   {
     p[i] = 0;
   }

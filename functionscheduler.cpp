@@ -86,7 +86,7 @@ void FunctionScheduler::delayImpl(const Routine_t& function,
                                   const ExceptonCallback_t& ec,
                                   const RuntimeErrorCallback_t& rec)
 {
-  for(int i = 0; i < ms / DelayStep; i++)
+  for (int i = 0; i < ms / DelayStep; i++)
   {
     if (self().m_destroyFlag)
     {

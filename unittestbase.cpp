@@ -97,13 +97,13 @@ bool UnitTestBase::resultsToFile(ePrintFormat_t format, const QString& path)
     bool bRet = false;
     do
     {
-        if(path.isEmpty())
+        if (path.isEmpty())
         {
             LOG_WARNING("empty file path");
             break;
         }
     QFile out(path);
-    if(!out.open(QIODevice::WriteOnly))
+    if (!out.open(QIODevice::WriteOnly))
     {
         LOG_WARNING("cannot open "_s + path);
         break;
@@ -146,7 +146,7 @@ void UnitTestBase::skip(bool skip, const QString& reason)
 bool UnitTestBase::isPassed() const
 {
     bool bPassed = true;
-    for(const QString& key: results.keys())
+    for (const QString& key: results.keys())
     {
         TestResult result = results.value(key);
         if (!result.bSuccess)

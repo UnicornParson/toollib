@@ -21,7 +21,7 @@ TickCounter::TickCounter(const TickCounter&& other)
 
 TickCounter& TickCounter::operator=(const TickCounter& other)
 {
-    if(this != &other)
+    if (this != &other)
     {
         m_lastTime = other.m_lastTime;
     }

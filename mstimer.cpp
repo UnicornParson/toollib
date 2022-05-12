@@ -30,7 +30,7 @@ void MSTimer::removeAllObservers()
 
 void MSTimer::onTimeout()
 {
-  for(IMSTimerObserver *ptr: m_observers)
+  for (IMSTimerObserver *ptr: m_observers)
   {
     if (ptr != nullptr)
     {

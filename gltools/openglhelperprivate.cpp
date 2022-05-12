@@ -131,7 +131,7 @@ void OpenglHelperPrivate::updateVersionFlags()
 #endif
 #define _setBit(x) \
   m_versionFlags.setBit(eVersionFlag::GLEW##x, __GLEW_VERSION_##x); \
-  for(uint i = uint(eVersionFlag::GLEW1_1_andHigher); i < uint(eVersionFlag::GLEW##x##_andHigher); ++i)\
+  for (uint i = uint(eVersionFlag::GLEW1_1_andHigher); i < uint(eVersionFlag::GLEW##x##_andHigher); ++i)\
   {m_versionFlags.setBit(eVersionFlag(i), true);}
 
   _setBit(1_1);
