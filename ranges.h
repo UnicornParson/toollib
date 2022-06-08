@@ -8,8 +8,12 @@
 #include <QString>
 #include <QtConcurrent>
 
+#define foreach_map(container) for (auto it = container.keyValueBegin(); it != container.keyValueEnd(); ++it)
+#define foreach_map_const(container) for (auto it = container.constKeyValueBegin(); it != container.constKeyValueEnd(); ++it)
+
 namespace Tools::Ranges
 {
+
 template< class T >
 inline bool inRange(const T& val, const T& rangeMin, const T& rangeMax) noexcept
 {
