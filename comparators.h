@@ -5,6 +5,7 @@
 #include <QHash>
 #include <QtMath>
 #include "json.h"
+#include "ranges.h"
 
 Q_DECL_CONSTEXPR int DEFAULT_COMPARATION_PRECISION(4);
 
@@ -50,9 +51,10 @@ bool CompareMap(MapType const & left,
     {
         return false;
     }
-    for (const KeyType& key: left.keys())
+
+    foreach_map_const(left)
     {
-        if (left.value(key) != right.value(key))
+        if (it->second != right.value(it->first))
         {
             return false;
         }
@@ -68,9 +70,9 @@ bool CompareMapD(MapType const & left,
     {
         return false;
     }
-    for (const KeyType& key: left.keys())
+    foreach_map_const(left)
     {
-        if (!safeCompare<double>(left.value(key), right.value(key)))
+        if (!safeCompare<double>(it->second, right.value(it->first)))
         {
             return false;
         }
@@ -86,9 +88,10 @@ bool CompareMapF(MapType const & left,
     {
         return false;
     }
-    for (const KeyType& key: left.keys())
+
+    foreach_map_const(left)
     {
-        if (!safeCompare<float>(left.value(key), right.value(key)))
+        if (!safeCompare<float>(it->second, right.value(it->first)))
         {
             return false;
         }

@@ -148,7 +148,10 @@ HEADERS += \
     $$PWD/buildConstants.h \
     $$PWD/responseobject.h \
     $$PWD/ranges.h \
-    $$PWD/wachedvariable.h
+    $$PWD/wachedvariable.h \
+    $$PWD/badwaytrap.h
+
+
 SOURCES += \
     $$PWD/tools.cpp \
     $$PWD/json.cpp \
@@ -175,8 +178,8 @@ SOURCES += \
     $$PWD/version.cpp \
     $$PWD/functionscheduler.cpp\
     $$PWD/buildConstants.cpp \
-    $$PWD/wachedvariable.cpp
-
+    $$PWD/wachedvariable.cpp \
+    $$PWD/badwaytrap.cpp
 
 win32: DEFINES+=PLATFORM_WINDOWS
 } #else of DINC_TOOLS_MARKER

@@ -9,8 +9,8 @@ namespace Tools
 class IMetricRecord
 {
 public:
-    explicit IMetricRecord(uint category);
-    ~IMetricRecord();
+    explicit IMetricRecord(uint category) noexcept;
+    virtual ~IMetricRecord() noexcept;
     virtual QStringList GetStringRow() = 0;
     virtual QStringList GetHeader() = 0;
     uint category() const;

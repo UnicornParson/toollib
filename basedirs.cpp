@@ -4,9 +4,12 @@
 
 using namespace Tools;
 
+namespace
+{
 CONST_LITERAL DEFAULT_RC_HOME   ("/");
 CONST_LITERAL DEFAULT_IMG_HOME  ("skin/img/");
 CONST_LITERAL DEFAULT_LOG_HOME  ("log/");
+};
 
 BaseDirs& BaseDirs::instance()
 {

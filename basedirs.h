@@ -8,7 +8,6 @@ namespace Tools
 class BaseDirs: public QObject
 {
     Q_OBJECT
-    Q_ENUMS(eDirTag)
 public:
     enum eDirTag
     {

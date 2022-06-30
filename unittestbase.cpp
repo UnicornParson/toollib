@@ -175,6 +175,8 @@ QString UnitTestBase::resultsToString(ePrintFormat_t format)
     case ePrintFormat_t::Json:{return QtJson::serializeStr(printer.toJson(results));}
     case ePrintFormat_t::Html:{return printer.toHtml(results);}
     }
+    LOG_WARNING("unknown format");
+    return QString();
 }
 
 bool UnitTestBase::run()

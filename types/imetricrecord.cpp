@@ -2,13 +2,13 @@
 
 using namespace Tools;
 
-IMetricRecord::IMetricRecord(uint category):
+IMetricRecord::IMetricRecord(uint category) noexcept:
     m_category(category)
 {
 
 }
 
-IMetricRecord::~IMetricRecord()
+IMetricRecord::~IMetricRecord() noexcept
 {
 
 }
