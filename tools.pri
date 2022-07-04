@@ -192,7 +192,11 @@ HEADERS += \
     $$PWD/fileutils.h \
     $$PWD/literals.h \
     $$PWD/stringutils.h \
+    $$PWD/test/moptionaltest.h \
+    $$PWD/test/toollibtestbase.h \
+    $$PWD/testcontext.h \
     $$PWD/threadrunner.h \
+    $$PWD/test/toollibtestcontext.h \
     $$PWD/xmutexguard.h
 
 SOURCES += \
@@ -201,7 +205,11 @@ SOURCES += \
     $$PWD/exceptions/notimplementedexception.cpp \
     $$PWD/fileutils.cpp \
     $$PWD/stringutils.cpp \
+    $$PWD/test/moptionaltest.cpp \
+    $$PWD/test/toollibtestbase.cpp \
+    $$PWD/testcontext.cpp \
     $$PWD/threadrunner.cpp \
+    $$PWD/test/toollibtestcontext.cpp \
     $$PWD/xmutexguard.cpp
 
 RESOURCES += \

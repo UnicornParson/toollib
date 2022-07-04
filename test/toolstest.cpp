@@ -1,9 +1,12 @@
 #include "toolstest.h"
+#include "test/moptionaltest.h"
+#include "test/toollibtestcontext.h"
 #include "tools.h"
 #include <bitset>
 #include "lzma/lzma.h"
 #include "Updatable.h"
 #include <functional>
+#include "moptionaltest.h"
 
 using namespace Tools;
 using namespace QtJson;
@@ -62,17 +65,20 @@ CONST_LITERAL normalizedPath("C:/aaa/ssss/ffff/d");
 #endif
 
 ToolsTest::ToolsTest():
+    ToollibTestBase(),
   m_onUpdatedValue(0),
   m_onUpdateFinishedValue(0),
   m_onUpdateFinishedPrev(0),
   m_onUpdatedPrev(0)
 {
+    setTestContext(new ToollibTestContext());
   REGISTER_TEST_PLAN;
 }
 
 ToolsTest::~ToolsTest()
 {
-
+    delete m_context;
+    m_context = nullptr;
 }
 
 void ToolsTest::TestPlanSetup()
@@ -85,11 +91,13 @@ void ToolsTest::TestPlanCleanup()
 
 }
 
+
+
 bool ToolsTest::runImpl()
 {
   cToolsTest();
   dirPathUtilsTest();
-  mOptionalTest();
+  execTestPlan<MOptionalTest>();
   jsonTest();
   lzmaTest();
   updatableTest();

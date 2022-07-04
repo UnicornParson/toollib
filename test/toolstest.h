@@ -3,7 +3,7 @@
 #include "unittestbase.h"
 #include "Updatable.h"
 #include <QObject>
-
+#include "toollibtestbase.h"
 namespace Tools
 {
 
@@ -31,7 +31,7 @@ public:
 
 typedef DownloaderResultFields::e eDownloaderResultFields;
 
-class ToolsTest : public UnitTestBase
+class ToolsTest : public ToollibTestBase
 {
 public:
     ToolsTest();

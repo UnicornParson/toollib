@@ -76,7 +76,6 @@ QString ConfigManager::removeComments(const QString& content) const
         }
         ret.append(s);
     }
-    LOG_TRACE(ret);
     return ret;
 }
 

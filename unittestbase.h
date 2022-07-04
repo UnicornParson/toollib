@@ -3,6 +3,9 @@
 #include <QString>
 #include <QHash>
 
+#include "exceptions/notimplementedexception.h"
+#include "exceptions/toolsexception.h"
+#include "testcontext.h"
 #include "tickcounter.h"
 #include "toolsmacro.h"
 
@@ -43,11 +46,44 @@ public:
   ATTR_NODISCARD quint64 getTestPlanTimeMs();
   virtual void TestPlanSetup();
   virtual void TestPlanCleanup();
-
+  virtual Tools::TestContext* getContext();
+  virtual void setTestContext(Tools::TestContext* context);
   QString resultsToString(ePrintFormat_t format);
   bool resultsToFile(ePrintFormat_t format, const QString& path);
 protected:
-  virtual bool runImpl() = 0;
+  [[ noreturn ]] void crashExecution(const QString& reason);
+
+  template < class T >
+  void execTestPlan()
+  {
+      bool ret = false;
+      T plan;
+      QString planName(typeid(plan).name());
+      QString basicTestName = QString("TestPlan[%1]").arg(planName);
+      QString exceptionTestName = QString("TestPlanNoExcept[%1]").arg(planName);
+      logTestStart(basicTestName);
+      try
+      {
+          plan.setTestContext(getContext());
+          ret = plan.run();
+          appendResults(plan.getResults());
+      }
+      catch (const Tools::NotImplementedException& e)
+      {
+          logTestStart(exceptionTestName);
+          logTestEnd(exceptionTestName, false, e.toString());
+          ret = false;
+      }
+      catch (const Tools::ToolLibException& e)
+      {
+          logTestStart(exceptionTestName);
+          logTestEnd(exceptionTestName, false, e.toString());
+          ret = false;
+      }
+      logTestEnd(basicTestName, ret, "");
+  }
+
+    virtual bool runImpl() = 0;
   void logTestStart(const QString& testname);
   void logTestEnd(const QString& testname, bool bSuccess, const QString& reason = QString());
   ATTR_NODISCARD bool subTest(const QString& testName,

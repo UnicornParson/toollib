@@ -2,6 +2,7 @@
 #include "CuteLogger/cuteloggerinc.h"
 #include "internal/unittestprinterinternal.h"
 #include "tools.h"
+#include <cstdlib>
 
 using namespace Tools;
 
@@ -23,6 +24,22 @@ void UnitTestBase::logTestStart(const QString& testname)
     LOG_TRACE(QString("StartTest %1/%2").arg(m_testPlanName, testname));
     m_lastFailReason.clear();
     m_SingleTestTimer.reset();
+}
+
+void UnitTestBase::crashExecution(const QString& reason)
+{
+    qFatal("test system crashed. reason: %s", reason.toUtf8().data());
+    std::exit(EXIT_FAILURE);
+}
+
+void UnitTestBase::setTestContext(Tools::TestContext* context)
+{
+    Q_UNUSED(context)
+}
+
+Tools::TestContext* UnitTestBase::getContext()
+{
+    return nullptr;
 }
 
 bool UnitTestBase::subTest(const QString& testName, const QString& subTestName, bool condition, const QString& messageOnFail)
