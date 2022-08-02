@@ -40,7 +40,6 @@ public:
     void TestPlanCleanup();
 protected:
     bool runImpl();
-    void mOptionalTest();
     void cToolsTest();
     void jsonTest();
     void lzmaTest();

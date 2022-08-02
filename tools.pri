@@ -24,6 +24,64 @@ message("double include in $PWD")
 } else {
 INC_TOOLS_MARKER = 1
 export(INC_TOOLS_MARKER)
+HEADERS += \
+  $$PWD/crashtrap.h \
+  $$PWD/crashtrapnoop.h
+
+HEADERS += $$PWD/qaesencryption.h
+TESTSRC=$$PWD/test
+HEADERS += $$TESTSRC/toolstest.h
+INCLUDEPATH += $$TESTSRC/toolstest.h
+HEADERS += \
+    $$PWD/tools.h \
+    $$PWD/toolsmacro.h \
+    $$PWD/json.h \
+    $$PWD/tickcounter.h \
+    $$PWD/performancemonitor.h \
+    $$PWD/performancesensor.h \
+    $$PWD/basedirs.h \
+    $$PWD/configmanager.h \
+    $$PWD/platformhelper.h \
+    $$PWD/interfaces.h \
+    $$PWD/unittestbase.h \
+    $$PWD/memcontrol.h \
+    $$PWD/httpsyncdownloader.h \
+    $$PWD/securityutils.h \
+    $$PWD/filedownloader.h \
+    $$PWD/metricsapikeys.h \
+    $$PWD/objectid.h \
+    $$PWD/logutils.h \
+    $$PWD/xmutex.h \
+    $$PWD/sharedxmutex.h \
+    $$PWD/asyncmetricscollector.h \
+    $$PWD/comparators.h \
+    $$PWD/mstimer.h \
+    $$PWD/simplemetricscollector.h \
+    $$PWD/Updatable.h \
+    $$PWD/concurentvalue.h \
+    $$PWD/idfactory.h \
+    $$PWD/version.h \
+    $$PWD/functionscheduler.h\
+    $$PWD/buildConstants.h \
+    $$PWD/responseobject.h \
+    $$PWD/ranges.h \
+    $$PWD/wachedvariable.h \
+    $$PWD/badwaytrap.h \
+    $$PWD/dataformatinfo.h \
+    $$PWD/exceptions/toolsexception.h \
+    $$PWD/exceptions/notimplementedexception.h \
+    $$PWD/exceptions/toollibexceptions.h \
+    $$PWD/fileutils.h \
+    $$PWD/literals.h \
+    $$PWD/stringutils.h \
+    $$PWD/test/moptionaltest.h \
+    $$PWD/test/rangestest.h \
+    $$PWD/test/toollibtestbase.h \
+    $$PWD/testcontext.h \
+    $$PWD/threadrunner.h \
+    $$PWD/test/toollibtestcontext.h \
+    $$PWD/xmutexguard.h
+
 
 DEFINES += BUILD_TARGET='"\\\"$$TARGET\\\""'
 DEFINES += BUILD_QMAKE_FLAGS='"\\\"$$QMAKE_CFLAGS\\\""'
@@ -40,21 +98,17 @@ QT += network xml core concurrent
 CONFIG += NO_OPENSSL_LIB
 QMAKE_CXXFLAGS_WARN_ON -= -Wreorder -Wformat= -WsignConversion
 
+include(toolsInclude.pri)
 include(types/toollibTypes.pri)
 include(toollibInternal.pri)
 
-HEADERS += \
-  $$PWD/crashtrap.h \
-  $$PWD/crashtrapnoop.h
+
 SOURCES += \
   $$PWD/crashtrap.cpp \
   $$PWD/crashtrapnoop.cpp
 
-
-
 message("build without openssl libs")
 DEFINES += "NO_OPENSSL_LIB"
-HEADERS += $$PWD/qaesencryption.h
 SOURCES += $$PWD/qaesencryption.cpp
 
 
@@ -109,48 +163,8 @@ include($$PWD/lzma/lzma.pri)
 
 #selftest
 TESTSRC=$$PWD/test
-HEADERS += \
-  $$TESTSRC/toolstest.h
-SOURCES += \
-  $$TESTSRC/toolstest.cpp
 
-
-HEADERS += \
-    $$PWD/tools.h \
-    $$PWD/toolsmacro.h \
-    $$PWD/json.h \
-    $$PWD/tickcounter.h \
-    $$PWD/performancemonitor.h \
-    $$PWD/performancesensor.h \
-    $$PWD/basedirs.h \
-    $$PWD/configmanager.h \
-    $$PWD/platformhelper.h \
-    $$PWD/interfaces.h \
-    $$PWD/unittestbase.h \
-    $$PWD/memcontrol.h \
-    $$PWD/httpsyncdownloader.h \
-    $$PWD/securityutils.h \
-    $$PWD/filedownloader.h \
-    $$PWD/metricsapikeys.h \
-    $$PWD/objectid.h \
-    $$PWD/logutils.h \
-    $$PWD/xmutex.h \
-    $$PWD/sharedxmutex.h \
-    $$PWD/asyncmetricscollector.h \
-    $$PWD/comparators.h \
-    $$PWD/mstimer.h \
-    $$PWD/simplemetricscollector.h \
-    $$PWD/Updatable.h \
-    $$PWD/concurentvalue.h \
-    $$PWD/idfactory.h \
-    $$PWD/version.h \
-    $$PWD/functionscheduler.h\
-    $$PWD/buildConstants.h \
-    $$PWD/responseobject.h \
-    $$PWD/ranges.h \
-    $$PWD/wachedvariable.h \
-    $$PWD/badwaytrap.h
-
+SOURCES += $$TESTSRC/toolstest.cpp
 
 SOURCES += \
     $$PWD/tools.cpp \
@@ -184,21 +198,6 @@ SOURCES += \
 win32: DEFINES+=PLATFORM_WINDOWS
 } #else of DINC_TOOLS_MARKER
 
-HEADERS += \
-    $$PWD/dataformatinfo.h \
-    $$PWD/exceptions/toolsexception.h \
-    $$PWD/exceptions/notimplementedexception.h \
-    $$PWD/exceptions/toollibexceptions.h \
-    $$PWD/fileutils.h \
-    $$PWD/literals.h \
-    $$PWD/stringutils.h \
-    $$PWD/test/moptionaltest.h \
-    $$PWD/test/toollibtestbase.h \
-    $$PWD/testcontext.h \
-    $$PWD/threadrunner.h \
-    $$PWD/test/toollibtestcontext.h \
-    $$PWD/xmutexguard.h
-
 SOURCES += \
     $$PWD/dataformatinfo.cpp \
     $$PWD/exceptions/toolsexception.cpp \
@@ -206,6 +205,7 @@ SOURCES += \
     $$PWD/fileutils.cpp \
     $$PWD/stringutils.cpp \
     $$PWD/test/moptionaltest.cpp \
+    $$PWD/test/rangestest.cpp \
     $$PWD/test/toollibtestbase.cpp \
     $$PWD/testcontext.cpp \
     $$PWD/threadrunner.cpp \

@@ -4,6 +4,7 @@
 // CPP includes
 #include <climits>
 #include <algorithm>
+#include <list>
 #include <type_traits>
 #include <cstdlib>
 #include <utility>
@@ -37,8 +38,13 @@
 #include "literals.h"
 #include "stringutils.h"
 
-typedef std::atomic<quint64> counter_t;
-typedef qint64 msTime_t;
+using counter_t = std::atomic<quint64>;
+using msTime_t = qint64;
+
+template <typename T>
+using mlist_t = std::list<T>;
+
+
 
 #ifdef USE_CPP_TIME
 inline msTime_t msTime() noexcept

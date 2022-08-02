@@ -92,7 +92,9 @@
 #define ISNULL2STR(x) ((x == nullptr) ? "NULL" : "NOT NULL")
 #define BOOL2STR(x) boolToString(x)
 #define BOOLYESNO(x) ((x) ? "YES" : "NO")
+
 #define doubleToString(x) (QString().asprintf("%f", x))
+
 #define ZERO_MEM(a) memset((a), 0, sizeof(a))
 #define ARRAY_SIZE_IN_ELEMENTS(a) (sizeof(a)/sizeof(a[0]))
 
