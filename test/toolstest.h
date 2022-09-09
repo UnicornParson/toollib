@@ -56,6 +56,9 @@ private:
     uint m_updaterExpectedValue;
     uint m_onUpdateFinishedPrev;
     uint m_onUpdatedPrev;
+
+    void onValueUpdatedFunct(const uint& newVal, const uint& prevVal);
+    void onValueUpdateFinishedFunct(const uint& newVal, const uint& prevVal);
 }; // class ToolsTest
 } // namespace Tools
 #endif // TOOLSTEST_H
