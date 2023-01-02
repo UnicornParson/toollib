@@ -3,7 +3,6 @@
 #include <atomic>
 namespace Tools
 {
-#ifdef BADWAY_TRAP_FEATURE
 
 class BadwayTrapConfig
 {
@@ -32,7 +31,7 @@ private:
 };
 
 
-
+#ifdef BADWAY_TRAP_FEATURE
 #define BADWAY_TRAP(msg) if(Tools::BadwayTrapConfig::isTrapEnabled()){ qFatal("SOMETHING IS WRONG HERE %s (%s)", __HERE__, QString(msg).toUtf8().data());}
 #else
 #define BADWAY_TRAP(msg) if(Tools::BadwayTrapConfig::isTrapEnabled()){ qWarning("(%s) %s", __HERE__, SCHR_CONST(QString(msg)));}
