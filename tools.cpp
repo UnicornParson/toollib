@@ -22,15 +22,6 @@ const QChar invalidPathSeparator = QChar('\\');
 const QLatin1String doubleSeparator("//");
 #endif
 }
-CTools::CTools()
-{
-
-}
-
-CTools::~CTools()
-{
-
-}
 
 QString CTools::getPathSeparator()
 {

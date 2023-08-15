@@ -8,6 +8,7 @@
 #include <type_traits>
 #include <cstdlib>
 #include <utility>
+#include <memory>
 
 // QT includes
 #include <QString>
@@ -157,8 +158,7 @@ namespace Tools
   class CTools
   {
   public:
-    ~CTools();
-    CTools();
+
     /* convert path to OS based standart. depends of platform define
      * - #define PLATFORM_WINDOWS
      * - #define PLATFORM_LINUX
@@ -184,6 +184,8 @@ namespace Tools
     static bool compareFiles(QFile &left, QFile &right, bool& ok);
     static void SyncThreadTerminate(QThread* ptr, int delay = DEFAULT_THREAD_TERMINATE_DELAY);
   private:
+    ~CTools() = delete;
+    CTools() = delete;
     Q_DISABLE_COPY_MOVE(CTools)
   };
   //typedef

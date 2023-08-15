@@ -5,14 +5,15 @@
 #include <json.h>
 #include <QObject>
 #include "toolsmacro.h"
-//deprecated
+
+
 class ISerializable
 {
 public:
-    ISerializable() noexcept;
-    virtual ~ISerializable() noexcept;
-    virtual QByteArray serialize() const = 0;
-    virtual bool deserialize(const QByteArray& in) = 0;
+    [[deprecated]] ISerializable() noexcept;
+    [[deprecated]] virtual ~ISerializable() noexcept;
+    [[deprecated]] virtual QByteArray serialize() const = 0;
+    [[deprecated]] virtual bool deserialize(const QByteArray& in) = 0;
 };
 
 class IJSerializable
@@ -35,12 +36,22 @@ public:
     virtual QString toString() const = 0;
     virtual QString className() const;
     virtual QString objectName() const;
+
 };
 
 #define PRINTABLE_OBJECT_IMPL(c) \
     public: \
     virtual QString className() const Q_DECL_OVERRIDE {return #c ;} \
     virtual QString objectName() const Q_DECL_OVERRIDE {return QString("%1[%2]").arg(className()).arg(intptr_t(this));}
+
+class DataObject
+{
+public:
+    DataObject();
+    virtual ~DataObject();
+
+    virtual void reset() = 0;
+};
 
 #endif // INTERFACES
 

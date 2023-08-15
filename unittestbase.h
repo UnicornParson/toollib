@@ -8,6 +8,7 @@
 #include "testcontext.h"
 #include "tickcounter.h"
 #include "toolsmacro.h"
+#include "testhelper.h"
 
 #define REGISTER_TEST_PLAN m_testPlanName = QString(typeid(this).name())
 
@@ -101,5 +102,4 @@ protected:
     QString m_skipReason;
     QString m_testPlanName;
 };
-
 #endif // UNITTESTBASE_H

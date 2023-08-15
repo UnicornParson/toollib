@@ -208,12 +208,16 @@ SOURCES += \
     $$PWD/test/rangestest.cpp \
     $$PWD/test/toollibtestbase.cpp \
     $$PWD/testcontext.cpp \
+    $$PWD/testhelper.cpp \
     $$PWD/threadrunner.cpp \
     $$PWD/test/toollibtestcontext.cpp \
     $$PWD/xmutexguard.cpp
 
 RESOURCES += \
     $$PWD/res/embededData.qrc
+
+HEADERS += \
+    $$PWD/testhelper.h
 
 
 
