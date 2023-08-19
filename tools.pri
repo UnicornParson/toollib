@@ -199,6 +199,7 @@ win32: DEFINES+=PLATFORM_WINDOWS
 } #else of DINC_TOOLS_MARKER
 
 SOURCES += \
+    $$PWD/checkpoint.cpp \
     $$PWD/dataformatinfo.cpp \
     $$PWD/exceptions/toolsexception.cpp \
     $$PWD/exceptions/notimplementedexception.cpp \
@@ -217,6 +218,7 @@ RESOURCES += \
     $$PWD/res/embededData.qrc
 
 HEADERS += \
+    $$PWD/checkpoint.h \
     $$PWD/testhelper.h
 
 
