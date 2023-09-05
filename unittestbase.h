@@ -11,6 +11,11 @@
 #include "testhelper.h"
 
 #define REGISTER_TEST_PLAN m_testPlanName = QString(typeid(this).name())
+#define AutoTestName QString(Q_FUNC_INFO)
+#define AutoCompareEq(A, E) ((A) == (E)), ("unexpected %1. expected %2 actual %3"_s.arg( #A ).arg(A).arg(E))
+#define AutoCompareNEq(A, E) ((A) != (E)), ("unexpected %1. expected NOT %2 actual %3"_s.arg( #A ).arg(A).arg(E))
+#define TestCheckContains(Obj, Key) (Obj.contains(Key)), ("%1 does not contains %2").arg( #Obj ).arg(Key)
+#define TestCheckNotContains(Obj, Key) (!(Obj.contains(Key))), ("%1 contains %2").arg( #Obj ).arg(Key)
 
 class UnitTestBase
 {

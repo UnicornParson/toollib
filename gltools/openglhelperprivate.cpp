@@ -173,7 +173,7 @@ OpenglHelperPrivate():m_versionFlags(1, false){}
 void updateVersionFlags(){}
 bool checkVersionFlags(const QList<eVersionFlag>& flags)
 {
-  Q_UNUSED(flags)
+  UNUSED(flags)
   return false;
 }
 Version glVersion(){return Version();}
@@ -182,9 +182,9 @@ QString glVendorString(){return QString();}
 QString glRendererString(){return QString();}
 uint makeShader(eShaderType type, const QString& path, bool& ok)
 {
-  Q_UNUSED(type)
-  Q_UNUSED(path)
-  Q_UNUSED(ok)
+  UNUSED(type)
+  UNUSED(path)
+  UNUSED(ok)
   return 0;
 }
 #endif // FEATURE_OPENGL

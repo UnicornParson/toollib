@@ -20,7 +20,7 @@ class MemControlPrivate
 public:
     MemControlPrivate() = default;
     virtual ~MemControlPrivate() = default;
-    virtual void setTargetDir(const QString& path) { Q_UNUSED(path) }
+    virtual void setTargetDir(const QString& path) { UNUSED(path) }
     virtual void addPtr(const char* file,
                         const char* function,
                         int line,

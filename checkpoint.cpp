@@ -102,7 +102,7 @@ QtJson::JsonObject CheckpointsCollector::serialize()
 
 bool CheckpointsCollector::deserialize(const QtJson::JsonObject& in)
 {
-    Q_UNUSED(in)
+    UNUSED(in)
     BADWAY_TRAP("NOT DESERIALIZABLE OBJECT");
     return false;
 }

@@ -103,8 +103,10 @@
 #ifdef Q_UNUSED
 #define UNUSED(x) Q_UNUSED(x)
 #else
-#define UNUSED(x) (void)(x)
+#define UNUSED(x) (void)(x);
 #endif
+#define UNUSED2(a, b) UNUSED(a) UNUSED(b)
+#define UNUSED3PrintValues(a, b, c) UNUSED(a) UNUSED(b) UNUSED(c)
 
 #define LCHR(l) (l.data())
 #define GLOBALBUF Q_DECL_CONSTEXPR static const char
@@ -348,5 +350,7 @@ inline Q_NORETURN void __not_implemented_impl(const QString& here)
 
 #define BUILD_DATETIME __DATE__ __TIME__
 #define BUILD_DATETIME_S QString("%1-%2").arg(__DATE__).arg(__TIME__)
+
+#define PRINTABLE_VARIABLE(x) QString("%1:%2").arg((#x)).arg(x)
 
 #endif // TOOLSMACRO_H

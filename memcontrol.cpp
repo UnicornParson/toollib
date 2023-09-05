@@ -208,14 +208,14 @@ void MemControl::addPtr(const char* file,
         LOG_ERROR("Mem control is enabled but target is not selected. check build keys");
     }
 #else
-    Q_UNUSED(file)
-    Q_UNUSED(function)
-    Q_UNUSED(line)
-    Q_UNUSED(x)
-    Q_UNUSED(size)
-    Q_UNUSED(owner)
-    Q_UNUSED(className)
-    Q_UNUSED(comment)
+    UNUSED(file)
+    UNUSED(function)
+    UNUSED(line)
+    UNUSED(x)
+    UNUSED(size)
+    UNUSED(owner)
+    UNUSED(className)
+    UNUSED(comment)
 #endif
 }
 

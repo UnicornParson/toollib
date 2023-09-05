@@ -6,7 +6,6 @@
 #include <QObject>
 #include "toolsmacro.h"
 
-
 class ISerializable
 {
 public:
@@ -51,6 +50,15 @@ public:
     virtual ~DataObject();
 
     virtual void reset() = 0;
+    virtual bool isEmpty() const;
+};
+
+
+class SerializableDataObject: public DataObject, public IJSerializable
+{
+public:
+    SerializableDataObject();
+    virtual ~SerializableDataObject();
 };
 
 #endif // INTERFACES

@@ -34,7 +34,7 @@ void UnitTestBase::crashExecution(const QString& reason)
 
 void UnitTestBase::setTestContext(Tools::TestContext* context)
 {
-    Q_UNUSED(context)
+    UNUSED(context)
 }
 
 Tools::TestContext* UnitTestBase::getContext()

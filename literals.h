@@ -11,7 +11,7 @@ INLINE const QString operator"" _s(const char* c)
 
 INLINE const QString operator"" _s(const char* c, size_t sz)
 {
-    Q_UNUSED(sz)
+    UNUSED(sz)
     return QString(c);
 }
 

@@ -421,7 +421,7 @@ void SecurityUtilsEmbeded::secureErase(void* ptr, size_t size)
 
 QByteArray SecurityUtilsEmbeded::getSignedFingerprint(const QByteArray& in)
 {
-  Q_UNUSED(in)
+  UNUSED(in)
   THROW_TOOL_LIB_UNSUPPORTED_EXCEPTION;
 #if 0
   QByteArray ret;

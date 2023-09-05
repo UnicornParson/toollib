@@ -16,7 +16,7 @@ CrashTrapNoop::~CrashTrapNoop()
 bool CrashTrapNoop::init(const QString& crashDumpBase)
 {
     LOG_INFO("Crash trap is disabled in this configurations");
-    Q_UNUSED(crashDumpBase)
+    UNUSED(crashDumpBase)
     return true;
 }
 
@@ -30,6 +30,6 @@ void CrashTrapNoop::stableAssert(bool conditionResult, const QString& messageOnF
 
 void CrashTrapNoop::setExternalCrashHandler(ExternalCrashHandler_t func)
 {
-    Q_UNUSED(func)
+    UNUSED(func)
 }
 #endif // FEATURE_BOOST

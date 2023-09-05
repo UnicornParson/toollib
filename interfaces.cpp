@@ -10,6 +10,10 @@ using namespace Tools;
 
 DataObject::DataObject(){CONSTRUCTOR_SERSOR(DataObject);}
 DataObject::~DataObject(){DESTRUCTOR_SERSOR(DataObject);}
+SerializableDataObject::SerializableDataObject(){CONSTRUCTOR_SERSOR(SerializableDataObject);}
+SerializableDataObject::~SerializableDataObject(){DESTRUCTOR_SERSOR(SerializableDataObject);}
+
+bool DataObject::isEmpty() const {return false;}
 
 ISerializable::ISerializable() noexcept{}
 IJSerializable::IJSerializable() noexcept{}

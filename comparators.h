@@ -43,6 +43,11 @@ bool CompareList(QList<T>const& left,
     return tright.isEmpty();
 }
 
+inline bool CompareStringList(const QStringList& left, const QStringList& right)
+{
+    return CompareList<QString>(left, right);
+}
+
 template<typename MapType, typename KeyType>
 bool CompareMap(MapType const & left,
                 MapType const & right)

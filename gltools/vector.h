@@ -54,7 +54,7 @@ public:
 
   void Print(bool endl = true) const
   {
-    Q_UNUSED(endl)
+    UNUSED(endl)
     LOG_TRACE(toString());
   }
 
@@ -149,7 +149,7 @@ public:
 
   void Print(bool endl = true) const
   {
-    Q_UNUSED(endl)
+    UNUSED(endl)
     LOG_TRACE(toString());
   }
 
@@ -274,7 +274,7 @@ public:
 
   void Print(bool endl = true) const
   {
-    Q_UNUSED(endl)
+    UNUSED(endl)
     LOG_TRACE(toString());
   }
 
@@ -336,7 +336,7 @@ public:
 
   void Print(bool endl = true) const
   {
-    Q_UNUSED(endl)
+    UNUSED(endl)
     LOG_TRACE(toString());
   }
 
@@ -392,7 +392,7 @@ public:
   void set(type val) { x = val; y = val;} \
   inline bool isZero() const {return (x == 0) && (y == 0);} \
   inline bool isOne() const {return (x == 1) && (y == 1);} \
-  void Print(bool endl = true) const { Q_UNUSED(endl) LOG_TRACE(QString("%1.%2").arg(static_cast<double>(x)).arg(static_cast<double>(y))); } \
+  void Print(bool endl = true) const { UNUSED(endl) LOG_TRACE(QString("%1.%2").arg(static_cast<double>(x)).arg(static_cast<double>(y))); } \
   operator const type*() const { return &(x); } \
   \
   Vector2##suffix& Normalize() \
@@ -449,7 +449,7 @@ public:
   \
   void Print(bool endl = true) const \
 { \
-  Q_UNUSED(endl) \
+  UNUSED(endl) \
   LOG_TRACE(QString("%1.%2").arg(static_cast<double>(w)).arg(static_cast<double>(h))); \
   } \
   \
@@ -725,8 +725,8 @@ class IVectorChangeObserver
 public:
   virtual void onVecotorChanged(const QString& name, VectorParamName pn)
   {
-    Q_UNUSED(name)
-    Q_UNUSED(pn)
+    UNUSED(name)
+    UNUSED(pn)
   }
   virtual ~IVectorChangeObserver(){}
 };

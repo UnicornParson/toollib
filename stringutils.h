@@ -5,6 +5,7 @@
 
 namespace Tools
 {
+
 template<class T, class U>
 inline QTextStream& operator<<(QTextStream& out, const QPair<T, U>& pair) {
     out << "QPair<" << pair.first << pair.second << ">";

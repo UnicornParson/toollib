@@ -28,6 +28,7 @@
 #include <QIODevice>
 #include <QDebug>
 
+#include "toolsmacro.h"
 
 #ifdef _MSC_VER
 #pragma warning( push )
@@ -395,7 +396,7 @@ void LZMACoder::decode2()
 
 SRes encode2progress(void *p, UInt64 inSize, UInt64 outSize)
 {
-  Q_UNUSED(outSize);
+  UNUSED(outSize);
   QCompressProgress* cp = (QCompressProgress*)p;
   //TODO: ratio
   double d = (static_cast<double>(inSize)/static_cast<double>(cp->size)) * 100.0;
