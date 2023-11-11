@@ -35,6 +35,17 @@ QString IPrintable::objectName() const
 {
     return QString("%1[%2]").arg(className()).arg(uintptr_t(this));
 }
+bool IJSerializable::deserializeStr(const QString& in)
+{
+    bool isOk = false;
+    QtJson::JsonObject obj = QtJson::parse(in, isOk).toMap();
+    if (!isOk)
+    {
+        LOG_ERROR(QString("cannot parse string %1").arg(in));
+        return false;
+    }
+    return deserialize(obj);
+}
 bool IJSerializable::fromFile(const QString& path)
 {
     bool rc = false;

@@ -14,8 +14,8 @@
 #define REGISTER_TEST_PLAN m_testPlanName = QString(typeid(this).name())
 
 #define AutoTestName QString(Q_FUNC_INFO)
-#define AutoCompareEq(A, E) ((A) == (E)), ("unexpected %1. expected %2 actual %3"_s.arg( #A ).arg(A).arg(E))
-#define AutoCompareNEq(A, E) ((A) != (E)), ("unexpected %1. expected NOT %2 actual %3"_s.arg( #A ).arg(A).arg(E))
+#define AutoCompareEq(A, E) ((A) == (E)), ("unexpected %1. expected %2 actual %3"_s.arg( #A ).arg(E).arg(A))
+#define AutoCompareNEq(A, E) ((A) != (E)), ("unexpected %1. expected NOT %2 actual %3"_s.arg( #A ).arg(E).arg(A))
 
 #define AutoCompareEqDouble(A, E) (Tools::compareDouble((A), (E))), ("unexpected %1. expected %2 actual %3"_s.arg( #A ).arg(A).arg(E))
 #define AutoCompareNEqDouble(A, E) (!Tools::compareDouble((A), (E))), ("unexpected %1. expected NOT %2 actual %3"_s.arg( #A ).arg(A).arg(E))
@@ -26,20 +26,20 @@
 #define TestCheckContains(Obj, Key) (Obj.contains(Key)), ("%1 does not contains %2").arg( #Obj ).arg(Key)
 #define TestCheckNotContains(Obj, Key) (!(Obj.contains(Key))), ("%1 contains %2").arg( #Obj ).arg(Key)
 
-#define SubTestEq(A, B) if (!subTest(AutoTestName, QString("test %1 value l.%2"_s).arg( #A ).arg(__LINE__),AutoCompareEq(A, B))){break;}
-#define SubTestNEq(A, B) if (!subTest(AutoTestName, QString("test %1 value l.%2"_s).arg( #A ).arg(__LINE__),AutoCompareNEq(A, B))){break;}
+#define SubTestEq(A, B) if (!subTest(QString("%1.%2").arg(AutoTestName).arg(__LINE__), QString("test %1 value l.%2"_s).arg( #A ).arg(__LINE__),AutoCompareEq(A, B))){break;}
+#define SubTestNEq(A, B) if (!subTest(QString("%1.%2").arg(AutoTestName).arg(__LINE__), QString("test %1 value l.%2"_s).arg( #A ).arg(__LINE__),AutoCompareNEq(A, B))){break;}
 
-#define SubTestEqDouble(A, B) if (!subTest(AutoTestName, QString("test %1 value l.%2"_s).arg( #A ).arg(__LINE__), AutoCompareEqDouble(A, B))){break;}
-#define SubTestNEqDouble(A, B) if (!subTest(AutoTestName, QString("test %1 value l.%2"_s).arg( #A ).arg(__LINE__),AutoCompareNEqDouble(A, B))){break;}
+#define SubTestEqDouble(A, B) if (!subTest(QString("%1.%2").arg(AutoTestName).arg(__LINE__), QString("test %1 value l.%2"_s).arg( #A ).arg(__LINE__), AutoCompareEqDouble(A, B))){break;}
+#define SubTestNEqDouble(A, B) if (!subTest(QString("%1.%2").arg(AutoTestName).arg(__LINE__), QString("test %1 value l.%2"_s).arg( #A ).arg(__LINE__),AutoCompareNEqDouble(A, B))){break;}
 
-#define SubTestEqFloat(A, B) if (!subTest(AutoTestName, QString("test %1 value l.%2"_s).arg( #A ).arg(__LINE__), AutoCompareEqFloat(A, B))){break;}
-#define SubTestNEqFloat(A, B) if (!subTest(AutoTestName, QString("test %1 value l.%2"_s).arg( #A ).arg(__LINE__),AutoCompareNEqFloat(A, B))){break;}
+#define SubTestEqFloat(A, B) if (!subTest(QString("%1.%2").arg(AutoTestName).arg(__LINE__), QString("test %1 value l.%2"_s).arg( #A ).arg(__LINE__), AutoCompareEqFloat(A, B))){break;}
+#define SubTestNEqFloat(A, B) if (!subTest(QString("%1.%2").arg(AutoTestName).arg(__LINE__), QString("test %1 value l.%2"_s).arg( #A ).arg(__LINE__),AutoCompareNEqFloat(A, B))){break;}
 
-#define SubTestTrue(A) if (!subTest(AutoTestName, QString("test %1 value l.%2"_s).arg( #A ).arg(__LINE__),AutoCompareEq(A, true))){break;}
-#define SubTestFalse(A) if (!subTest(AutoTestName, QString("test %1 value"_s).arg( #A ).arg(__LINE__),AutoCompareEq(A, false))){break;}
+#define SubTestTrue(A) if (!subTest(QString("%1.%2").arg(AutoTestName).arg(__LINE__), QString("test %1 value l.%2"_s).arg( #A ).arg(__LINE__),AutoCompareEq(A, true))){break;}
+#define SubTestFalse(A) if (!subTest(QString("%1.%2").arg(AutoTestName).arg(__LINE__), QString("test %1 value"_s).arg( #A ).arg(__LINE__),AutoCompareEq(A, false))){break;}
 
-#define SubTestContains(Obj, Key) if (!subTest(AutoTestName, QString("test %1 in %2 l.%3"_s).arg( #Key ).arg( #Obj ).arg(__LINE__),TestCheckContains(Obj, Key))){break;}
-#define SubTestNotContains(Obj, Key) if (!subTest(AutoTestName, QString("test %1 NOT in %2 l.%3"_s).arg( #Key ).arg( #Obj ).arg(__LINE__),TestCheckNotContains(Obj, Key))){break;}
+#define SubTestContains(Obj, Key) if (!subTest(QString("%1.%2").arg(AutoTestName).arg(__LINE__), QString("test %1 in %2 l.%3"_s).arg( #Key ).arg( #Obj ).arg(__LINE__),TestCheckContains(Obj, Key))){break;}
+#define SubTestNotContains(Obj, Key) if (!subTest(QString("%1.%2").arg(AutoTestName).arg(__LINE__), QString("test %1 NOT in %2 l.%3"_s).arg( #Key ).arg( #Obj ).arg(__LINE__),TestCheckNotContains(Obj, Key))){break;}
 
 class UnitTestBase
 {

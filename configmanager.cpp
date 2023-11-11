@@ -533,7 +533,7 @@ QStringList ConfigManager::getDump()
         QString sOrigin = (ok) ? origin.toString() : "[[MISSED]]";
         list.append(QString("[%1] >> actual:%2, origin:%3").arg(key, sActual, sOrigin));
     }
-    LOG_TRACE("%d parameters are dumped", m_params.size());
+    LOG_TRACE("%lld parameters are dumped", m_params.size());
     DESTROY_PERF_SENSOR;
     return list;
 }

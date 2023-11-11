@@ -96,7 +96,7 @@ bool FileDownloader::SyncDownload(const QString& urlStr,
         if (url.isLocalFile())
         {
             if (!m_allowLocalDownloads)
-        {
+            {
                 logError(QString("local downloads are not allowed but %1 is a local file").arg(url.toString()));
                 rc->setRc(eBaseErrorCodes::InvalidAddress);
                 break;
@@ -216,7 +216,7 @@ void FileDownloader::OnHttpFinished()
 #endif
     }
     QByteArray dataPart = m_reply->readAll();
-    LOG_TRACE("received %d", dataPart.size());
+    LOG_TRACE("received %lld", dataPart.size());
     m_pTargetFile->write(dataPart);
     m_pTargetFile->flush();
     m_reply->deleteLater();
@@ -226,7 +226,7 @@ void FileDownloader::OnHttpFinished()
 void FileDownloader::OnHttpReadyRead()
 {
     QByteArray dataPart = m_reply->readAll();
-    LOG_TRACE("received %d", dataPart.size());
+    LOG_TRACE("received %lld", dataPart.size());
     if (!dataPart.isEmpty())
     {
         m_pTargetFile->write(dataPart);
@@ -236,11 +236,11 @@ void FileDownloader::OnHttpReadyRead()
 
 void FileDownloader::OnReplyFinished(QNetworkReply* pReply)
 {
-QString surl;
-if (pReply != nullptr)
-{
-     surl = pReply->url().toString();
-}
+    QString surl;
+    if (pReply != nullptr)
+    {
+        surl = pReply->url().toString();
+    }
     LOG_TRACE("replyFinished. target: %s", SCHR(surl));
     OnHttpFinished();
 }
@@ -251,7 +251,7 @@ void FileDownloader::OnSslErrors(QNetworkReply *reply, const QList<QSslError> &e
     QString surl;
     if (reply != nullptr)
     {
-         surl = reply->url().toString();
+        surl = reply->url().toString();
     }
     QString msg = QString("SSL errors for url %1: \n").arg(surl);
     for (const QSslError& err: errors)

@@ -22,6 +22,7 @@ public:
     virtual ~IJSerializable() noexcept;
     virtual QtJson::JsonObject serialize() = 0;
     virtual bool deserialize(const QtJson::JsonObject& in) = 0;
+    virtual bool deserializeStr(const QString& in);
     ATTR_NODISCARD virtual bool fromFile(const QString& path);
     ATTR_NODISCARD virtual bool toFile(const QString& path);
 };
