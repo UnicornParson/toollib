@@ -5,7 +5,12 @@
 #include "qglobal.h"
 #include "qthread.h"
 #include "qvariant.h"
+#include "tools.h"
 #include "toolsmacro.h"
+#include "xmutex.h"
+#include "xmutexguard.h"
+#include <chrono>
+#include <thread>
 namespace Tools
 {
 class WachedVariableNotifier: public QObject
@@ -35,30 +40,50 @@ public:
         return *this;
     }
 
-    bool operator==(const WachedVariable& other)const{return m_value == other.m_value;}
-    bool operator!=(const WachedVariable& other)const{return m_value != other.m_value;}
+    bool operator==(const WachedVariable& other)const
+    {
+        XMutexGuard g(&m_mutex);
+        return m_value == other.m_value;
+    }
+    bool operator!=(const WachedVariable& other)const
+    {
+        XMutexGuard g(&m_mutex);
+        return m_value != other.m_value;
+    }
 
+    T get() const
+    {
+        XMutexGuard g(&m_mutex);
+        return m_value;
+    }
 
-
-    T get() const {return m_value;}
+    // Warning! thread unsafe
     T& rget() {return m_value;}
     const T& crget() const {return m_value;}
+
     WachedVariableNotifier* notifier() {return &m_notifier;}
     void set(const T& v)
     {
+        XMutexGuard g(&m_mutex);
         if(m_value != v)
         {
             m_value = v;
             emit m_notifier.valueChanged();
-            QThread::msleep(10);
         }
     }
-    bool waitForValue(const T& v, quint64 mstimeout = 0) const
+    bool waitForValue(const T& v, qint64 mstimeout = 0) const
     {
         QElapsedTimer timer;
-        while((v != m_value) && (mstimeout > 0) && (timer.elapsed() <= mstimeout))
+        XMUTEX_LOCK(m_mutex);
+        T last = m_value;
+        XMUTEX_UNLOCK(m_mutex);
+        while((v != last) && (mstimeout > 0) && (timer.elapsed() <= mstimeout))
         {
-            QThread::msleep(10);
+            mssleep(10);
+
+            XMUTEX_LOCK(m_mutex);
+            last = m_value;
+            XMUTEX_UNLOCK(m_mutex);
         }
         return (mstimeout <= 0) || (timer.elapsed() >= mstimeout);
     }
@@ -66,6 +91,7 @@ public:
 private:
     T m_value;
     WachedVariableNotifier m_notifier;
+    mutable XNonRecursiveMutex m_mutex;
 };
 
 typedef WachedVariable<int> WachedInt;

@@ -1,6 +1,7 @@
 #include "functionscheduler.h"
 #include <QThread>
 #include <QDebug>
+#include "tools.h"
 using namespace Tools;
 static constexpr int DelayStep(100);
 
@@ -92,9 +93,9 @@ void FunctionScheduler::delayImpl(const Routine_t& function,
     {
       return;
     }
-    QThread::msleep(DelayStep);
+    Tools::mssleep(DelayStep);
   }
-  QThread::msleep(ms % DelayStep);
+  Tools::mssleep(ms % DelayStep);
   if (self().m_destroyFlag)
   {
     return;
@@ -149,7 +150,7 @@ void FunctionScheduler::destroy()
   while(!isEmpty())
   {
     qDebug() << "wait for closing activites. count:" << refs() << "attempt:" << attempt;
-    QThread::msleep(DelayStep);
+    Tools::mssleep(DelayStep);
     attempt++;
   }
 }

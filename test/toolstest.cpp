@@ -441,14 +441,14 @@ void ToolsTest::functionSchedulerTest()
         auto throwableRoutine = []()
         {
             unsigned long delay = (mrand() % DEFAULT_DELAY) + delayOffset;
-            QThread::msleep(delay);
+            mssleep(delay);
             LOG_DEBUG("throw test exception");
             throw TestExceptionText.data();
         };
         auto throwableRuntimeExceptionRoutine = []()
         {
             unsigned long delay = (mrand() % DEFAULT_DELAY) + delayOffset;
-            QThread::msleep(delay);
+            mssleep(delay);
             LOG_DEBUG("throw test exception");
             throw std::runtime_error(TestRuntimeExceptionText.data());
         };
@@ -463,7 +463,7 @@ void ToolsTest::functionSchedulerTest()
         {
             LOG_DEBUG("wait %u", waitingCount);
             waitingCount++;
-            QThread::msleep(DEFAULT_DELAY);
+            mssleep(DEFAULT_DELAY);
         }
 
         if (!subTest(AutoTestName,

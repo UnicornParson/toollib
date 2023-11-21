@@ -16,6 +16,7 @@ public:
 
     void run() override;
     void exec(routine_t func);
+    void join();
 signals:
     void beforeRun();
     void afterRun();

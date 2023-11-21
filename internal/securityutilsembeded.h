@@ -23,6 +23,7 @@ public:
   static int rand();
   static quint64 rand64();
   static int rand(int min, int max);
+  static double randDouble(double min, double max);
   static QByteArray RandBytes(const size_t count);
   static int RandBytes(unsigned char* ptr, size_t count);
   static QString SaltString(const size_t len);

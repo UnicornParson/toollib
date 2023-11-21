@@ -1,4 +1,5 @@
 #include "syslogappender.h"
+#include "tools.h"
 #include <QNetworkProxy>
 SyslogAppender::SyslogAppender()
 {
@@ -97,7 +98,7 @@ void SyslogAppender::run()
 {
   while(!isIterrupted)
   {
-    QThread::msleep(20);
+    Tools::mssleep(20);
     queueMutex.lock();
     if (messageQueue.isEmpty())
     {

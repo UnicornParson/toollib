@@ -487,3 +487,11 @@ int SecurityUtilsEmbeded::rand(int min, int max)
   }
   return rc;
 }
+
+double SecurityUtilsEmbeded::randDouble(double min, double max)
+{
+    const double realMin = qMin<double>(min, max);
+    const double realMax = qMax<double>(min, max);
+    const double r = instance.mRandomEngine.generateDouble();
+    return realMin + r * (realMax - realMin);
+}

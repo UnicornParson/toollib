@@ -9,6 +9,8 @@
 #include <cstdlib>
 #include <utility>
 #include <memory>
+#include <chrono>
+#include <thread>
 
 // QT includes
 #include <QString>
@@ -91,6 +93,12 @@ namespace QtJson
 
 namespace Tools
 {
+
+  inline void mssleep(size_t ms)
+  {
+      std::this_thread::sleep_for(std::chrono::milliseconds(ms));
+  }
+
   // std::optional implementation for pre-C++17 compilers
   template< class T >
   class MOptional

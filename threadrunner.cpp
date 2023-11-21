@@ -1,4 +1,5 @@
 #include "threadrunner.h"
+#include "tools.h"
 
 using namespace Tools;
 
@@ -12,6 +13,14 @@ void ThreadRunner::exec(routine_t func)
 {
     m_routine = func;
     start();
+}
+
+void ThreadRunner::join()
+{
+    while(isRunning())
+    {
+        mssleep(10);
+    }
 }
 
 void ThreadRunner::run()

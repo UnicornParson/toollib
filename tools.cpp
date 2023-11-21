@@ -156,7 +156,7 @@ void CTools::SyncThreadTerminate(QThread* ptr, int delay)
     Q_DECL_CONSTEXPR int stepDelay = 100;
     while(ptr->isRunning() && delay > 0)
     {
-        QThread::msleep(stepDelay);
+        mssleep(stepDelay);
         delay -= stepDelay;
     }
     if (ptr->isRunning())

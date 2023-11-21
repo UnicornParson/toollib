@@ -38,7 +38,7 @@ void AsyncMetricsCollector::Writer::run()
         if (m_owner->m_records.isEmpty())
         {
             XMUTEX_UNLOCK(m_owner->m_recordsLock);
-            QThread::msleep(100);
+            Tools::mssleep(100);
             continue;
         }
         tmpQueue.swap(m_owner->m_records);

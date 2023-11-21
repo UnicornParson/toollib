@@ -38,11 +38,7 @@ QString TestHelper::camelizeStrRegister(const QString& in)
 
 double TestHelper::getRandDouble()
 {
-    double s1 = static_cast<double>(SecurityUtils::rand(0, 10000));
-    double s2 = static_cast<double>(SecurityUtils::rand(0, 10000));
-    double s3 = s2/1000.0;
-    //LOG_TRACE(QString("S1: %1, S2: %2, S3: %3").arg(s1).arg(s2).arg(s3));
-    return s1 + s3;
+    return SecurityUtils::randDouble(0, 10000);
 }
 
 int TestHelper::getRandInt()
